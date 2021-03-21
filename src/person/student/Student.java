@@ -13,9 +13,16 @@ public class Student extends Person {
     public Student() {
     }
 
+    public Student(String first_name, String last_name, String sex, String birth_date, String phone_number, String email, String join_date, int year, int semester, Subject[] subjects) {
+        super(first_name, last_name, sex, birth_date, phone_number, email, join_date);
+        this.year = year;
+        this.semester = semester;
+        this.subjects = subjects;
+    }
+
     public Student(String first_name, String last_name, String birth_date, String join_date, String email,
                    int year, int semester, Subject[] subjects) {
-        super(first_name, last_name, birth_date, join_date, email);
+
         this.year = year;
         this.semester = semester;
         this.subjects = subjects;
