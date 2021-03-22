@@ -1,5 +1,10 @@
 package person;
 
+import subject.OptionalSubject;
+
+import java.util.List;
+import java.util.Scanner;
+
 public abstract class Person {
     String first_name;
     String last_name;
@@ -10,6 +15,7 @@ public abstract class Person {
     String join_date;
 
     public Person() {
+        setPerson();
     }
 
     public Person(String first_name, String last_name, String sex, String birth_date, String phone_number, String email, String join_date) {
@@ -20,6 +26,32 @@ public abstract class Person {
         this.phone_number = phone_number;
         this.email = email;
         this.join_date = join_date;
+    }
+
+    public void setPerson(){
+        Scanner myInput = new Scanner(System.in);
+
+        System.out.println("\n--- Set person ---\n");
+        System.out.println("Enter first name: ");
+        this.first_name = myInput.nextLine();
+
+        System.out.println("Enter last name: ");
+        this.last_name = myInput.nextLine();
+
+        System.out.println("Enter sex: ");
+        this.sex = myInput.nextLine();
+
+        System.out.println("Enter birth date: ");
+        this.birth_date = myInput.nextLine();
+
+        System.out.println("Enter phone number: ");
+        this.phone_number = myInput.nextLine();
+
+        System.out.println("Enter email: ");
+        this.email = myInput.nextLine();
+
+        System.out.println("Enter join date: ");
+        this.join_date = myInput.nextLine();
     }
 
     public String getFirst_name() {
@@ -76,5 +108,18 @@ public abstract class Person {
 
     public void setJoin_date(String join_date) {
         this.join_date = join_date;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", sex='" + sex + '\'' +
+                ", birth_date='" + birth_date + '\'' +
+                ", phone_number='" + phone_number + '\'' +
+                ", email='" + email + '\'' +
+                ", join_date='" + join_date + '\'' +
+                '}';
     }
 }

@@ -12,6 +12,9 @@ public class Faculty {
         int taxCapacity;
         int taxPrice;
 
+        int num_of_budgetary = 0;   // number of students that are part of the budgetary plan
+        int num_of_tax = 0;         // number of students that are part of the tax plan
+
         public Specialization() {
             setSpecialization();
         }

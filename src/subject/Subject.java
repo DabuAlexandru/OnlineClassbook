@@ -70,6 +70,17 @@ public class Subject {
     public Subject() {
     }
 
+    public Subject(OptionalSubject optSubject) {
+        this.name = optSubject.name;
+        this.course = optSubject.course;
+        this.seminar = optSubject.seminar;
+        this.laboratory = optSubject.laboratory;
+
+        this.grade = optSubject.grade;
+        this.passing_grade = optSubject.passing_grade;
+        this.credits = optSubject.getCredits();
+    }
+
     public Subject(String name, StudyClass course, StudyClass seminar, StudyClass laboratory, int grade, float passing_grade, int credits) {
         this.name = name;
         this.course = course;

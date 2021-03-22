@@ -16,8 +16,7 @@ public class Group {
     public Group(String name, int numberOfStudents) {
         this.name = name;
         this.numberOfStudents = numberOfStudents;
-        for(int i = 0; i < numberOfStudents; i++)
-        {
+        for(int i = 0; i < numberOfStudents; i++) {
             this.students.add(new Student());
         }
     }
