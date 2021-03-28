@@ -47,7 +47,7 @@ public class Curriculum {
         }
     }
 
-    public void setCurriculum(Student student){
+    public void appendCurriculum(Student student){
         if((student.getYear() == 0) || (student.getSemester() == 0))
         {
             student.setYear(this.year);

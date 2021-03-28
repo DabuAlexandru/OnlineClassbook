@@ -12,7 +12,6 @@ public class Professor extends Person{
     int salary;
 
     public Professor() {
-        setProfessor();
     }
 
     public Professor(String first_name, String last_name, String sex, String birth_date, String phone_number, String email, String join_date, AcademicRank rank, int salary) {

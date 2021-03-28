@@ -4,15 +4,19 @@ import person.professor.Professor;
 
 import java.util.Scanner;
 
+import static java.lang.Math.max;
+
 public class Subject {
 
     protected static class StudyClass {
-        Professor professor;
+        Professor professor = new Professor();
         float weight; // percentage of the final grade
         float grade; // the grade of the student
         float passing_grade; // the minimum grade for the class
 
         public StudyClass() {
+            weight = 0;
+            passing_grade = -1;
         }
 
         public StudyClass(Professor professor, float weight, float grade, float passing_grade) {
@@ -24,14 +28,18 @@ public class Subject {
 
         public void setStudyClass()
         {
-            professor = new Professor();
             Scanner myInput = new Scanner(System.in);
 
-            System.out.println("Enter weight: ");
+            System.out.print("Enter weight: ");
             this.weight = myInput.nextFloat();
 
-            System.out.println("Enter passing_grade: ");
+            System.out.print("Enter passing_grade: ");
             this.passing_grade = myInput.nextFloat();
+        }
+
+        public void setStudyClass(float weight, float passing_grade) {
+            this.weight = weight;
+            this.passing_grade = passing_grade;
         }
 
         public float getPassing_grade() {
@@ -83,15 +91,24 @@ public class Subject {
 
     String name;
 
-    StudyClass course = null;
-    StudyClass seminar = null;
-    StudyClass laboratory = null;
+    StudyClass course;
+    StudyClass seminar;
+    StudyClass laboratory;
 
-    int grade = 1;
-    float passing_grade = 5;
-    int credits = 1;
+    int grade;
+    float passing_grade;
+    int credits;
+
+    protected int current_weight = 0;
 
     public Subject() {
+        this.name = "";
+        this.course = new StudyClass();
+        this.seminar = new StudyClass();
+        this.laboratory = new StudyClass();
+        this.grade = 1;
+        this.passing_grade = 5;
+        this.credits = 1;
     }
 
     public Subject(OptionalSubject optSubject) {
@@ -115,28 +132,62 @@ public class Subject {
         this.credits = credits;
     }
 
+    protected void checkWeight(float weight) {
+        if(weight + this.current_weight > 1)
+        {
+            this.course.setWeight(1 - weight);
+            this.current_weight = 1;
+        }
+        else
+        {
+            this.current_weight += weight;
+        }
+    }
+
+    protected void normalizeWeight() {
+        float ratio = current_weight / (course.weight + seminar.weight + laboratory.weight);
+        course.weight *= ratio;
+        seminar.weight *= ratio;
+        laboratory.weight *= ratio;
+    }
+
     public void setSubject() {
         Scanner myInput = new Scanner(System.in);
 
-        System.out.println("Enter name: ");
+        System.out.print("Enter name: ");
         this.name = myInput.nextLine();
 
         System.out.println("Course: ");
-        this.course = new StudyClass();
+        this.course.setStudyClass();
+        checkWeight(course.getWeight());
 
-        System.out.println("Does it have a seminar? (Y/N)");
+        System.out.print("Does it have a seminar? (Y/N): ");
         String aux;
         aux = myInput.nextLine();
         if(aux.equals("Y") || aux.equals("Yes"))
         {
             System.out.println("Seminar:");
-            this.seminar = new StudyClass();
+            this.seminar.setStudyClass();
+            checkWeight(seminar.getWeight());
+            /* if the weight of the course + the weight of the seminar are greater than 1
+            then the seminar will have to take the rest to 1, and the laboratory will have a weight of 0
+             */
+
+            System.out.print("Does it have a laboratory? (Y/N): ");
+            aux = myInput.nextLine();
+            if (aux.equals("Y") || aux.equals("Yes")) {
+                System.out.println("Laboratory:");
+                this.laboratory.setStudyClass();
+                checkWeight(laboratory.getWeight());
+            }
         }
         else
         {
             System.out.println("Laboratory:");
-            this.laboratory = new StudyClass();
+            this.laboratory.setStudyClass();
+            checkWeight(laboratory.getWeight());
         }
+        normalizeWeight();
     }
 
     public String getName() {
@@ -173,6 +224,22 @@ public class Subject {
 
     public int getGrade() {
         return grade;
+    }
+
+    public void setGrades(){
+        Scanner myInput = new Scanner(System.in);
+        System.out.print("Enter course grade: ");
+        this.course.grade = max(myInput.nextFloat(), 10);
+
+        if(seminar.passing_grade >= 0) {
+            System.out.print("Enter seminar grade: ");
+            this.seminar.grade = max(myInput.nextFloat(), 10);
+        }
+
+        if(laboratory.passing_grade >= 0) {
+            System.out.print("Enter laboratory grade: ");
+            this.laboratory.grade = max(myInput.nextFloat(), 10);
+        }
     }
 
     public void setGrade(int grade) {

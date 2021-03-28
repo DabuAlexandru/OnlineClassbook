@@ -15,7 +15,6 @@ public abstract class Person {
     String join_date;
 
     public Person() {
-        setPerson();
     }
 
     public Person(String first_name, String last_name, String sex, String birth_date, String phone_number, String email, String join_date) {

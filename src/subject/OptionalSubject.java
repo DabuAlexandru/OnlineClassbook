@@ -1,5 +1,7 @@
 package subject;
 
+import java.util.Scanner;
+
 public class OptionalSubject extends Subject {
     boolean graded = true;
     int slots_available;
@@ -11,6 +13,17 @@ public class OptionalSubject extends Subject {
         super(name, course, seminar, laboratory, grade, passing_grade, credits);
         this.graded = graded;
         this.slots_available = slots_available;
+    }
+
+    public void setOptionalSubject() {
+        Scanner myInput = new Scanner(System.in);
+        super.setSubject();
+        System.out.print("Is it graded? (Y/N): ");
+        String aux;
+        aux = myInput.nextLine();
+        this.graded = aux.equals("Y") || aux.equals("Yes");
+        System.out.print("Slots available: ");
+        this.slots_available = myInput.nextInt();
     }
 
     public boolean isGraded() {
