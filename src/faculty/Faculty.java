@@ -1,5 +1,13 @@
 package faculty;
 
+import faculty.group.Group;
+import faculty.series.Series;
+import person.professor.Professor;
+import person.student.Student;
+import subject.OptionalSubject;
+import subject.Subject;
+
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -89,6 +97,13 @@ public class Faculty { // singleton
     int numOfSpecializations;
     List<Specialization> specializations = new ArrayList<Specialization>();
 
+    List<Student> students = new ArrayList<>();
+    List<Subject> subjects = new ArrayList<>();
+    List<OptionalSubject> optionalSubjects = new ArrayList<>();
+    List<Professor> professors = new ArrayList<>();
+    List<Group> groups = new ArrayList<>();
+    List<Series> series = new ArrayList<>();
+
     private static Faculty faculty;
 
     private Faculty(String name, int numOfSpecializations) {
@@ -104,6 +119,88 @@ public class Faculty { // singleton
         if (faculty == null)
             faculty = new Faculty(name, numOfSpecializations);
         return faculty;
+    }
+
+    // add elements
+
+    public void addStudent(){
+        Student newStudent = new Student();
+        newStudent.setStudent();
+        students.add(newStudent);
+    }
+
+    public void addSubject(){
+        Subject newSubject = new Subject();
+        newSubject.setSubject();
+        subjects.add(newSubject);
+    }
+
+    public void addOptionalSubject(){
+        OptionalSubject newOptionalSubject = new OptionalSubject();
+        newOptionalSubject.setOptionalSubject();
+        optionalSubjects.add(newOptionalSubject);
+    }
+
+    public void addProfessor(){
+        Professor newProfessor = new Professor();
+        newProfessor.setProfessor();
+        professors.add(newProfessor);
+    }
+
+    public void addGroup(){
+        Group newGroup = new Group();
+        newGroup.setGroup();
+        groups.add(newGroup);
+    }
+
+    public void addSeries() {
+        Series newSeries = new Series();
+        newSeries.setSeries();
+        series.add(newSeries);
+    }
+
+    // print elements
+
+    public void printStudents(){
+        int i = 0;
+        for (Student student : students) {
+            System.out.println(++i + ": " + student);
+        }
+    }
+
+    public void printSubjects(){
+        int i = 0;
+        for (Subject subject : subjects) {
+            System.out.println(++i + ": " + subject);
+        }
+    }
+
+    public void printOptionalSubjects(){
+        int i = 0;
+        for (OptionalSubject optionalSubject : optionalSubjects) {
+            System.out.println(++i + ": " + optionalSubject);
+        }
+    }
+
+    public void printProfessors(){
+        int i = 0;
+        for (Professor professor : professors) {
+            System.out.println(++i + ": " + professor);
+        }
+    }
+
+    public void printSeries(){
+        int i = 0;
+        for (Series objSeries : series) {
+            System.out.println(++i + ": " + objSeries);
+        }
+    }
+
+    public void printGroups(){
+        int i = 0;
+        for (Group group : groups) {
+            System.out.println(++i + ": " + group);
+        }
     }
 
     @Override

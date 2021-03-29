@@ -1,6 +1,7 @@
 package service;
 
 import curriculum.Curriculum;
+import faculty.Faculty;
 import faculty.group.Group;
 import faculty.series.Series;
 import person.professor.Professor;
@@ -49,12 +50,7 @@ public class Main {
 //        subj2.setGrades();
 //        System.out.println("Grade: " + subj2.calculateGrade());
 
-        List<Student> students = new ArrayList<>();
-        List<Subject> subjects = new ArrayList<>();
-        List<OptionalSubject> optionalSubjects = new ArrayList<>();
-        List<Professor> professors = new ArrayList<>();
-        List<Group> groups = new ArrayList<>();
-        List<Series> series = new ArrayList<>();
+        Faculty faculty = Faculty.getFaculty("FMI", 2);
 
         Scanner myInput = new Scanner(System.in);
         int option;
@@ -80,12 +76,12 @@ public class Main {
                     System.out.println(
                             """
                                     Add a new item in the database
-                                    1. Add a new series
-                                    2. Add a new group
-                                    3. Add a new student
+                                    1. Add a new student
+                                    2. Add a new subject
+                                    3. Add a new optional subject
                                     4. Add a new professor
-                                    5. Add a new Subject
-                                    6. Add a new Optional Subject
+                                    5. Add a new group
+                                    6. Add a new series
                                     7. Add a new curriculum
                                     0. back to the start menu
                                     """
@@ -94,35 +90,23 @@ public class Main {
                     if(option == 0) { // back to the start menu
                         break;
                     }
-                    else if(option == 1){ // Add a new series
-                        Series newSeries = new Series();
-                        newSeries.setSeries();
-                        series.add(newSeries);
+                    else if(option == 1){ // Add a new student
+                        faculty.addStudent();
                     }
-                    else if(option == 2){ // Add a new group
-                        Group newGroup = new Group();
-                        newGroup.setGroup();
-                        groups.add(newGroup);
+                    else if(option == 2){ // Add a new subject
+                        faculty.addSubject();
                     }
-                    else if(option == 3){ // Add a new student
-                        Student newStudent = new Student();
-                        newStudent.setStudent();
-                        students.add(newStudent);
+                    else if(option == 3){ // Add a new optional subject
+                        faculty.addOptionalSubject();
                     }
                     else if(option == 4){ // Add a new professor
-                        Professor newProfessor = new Professor();
-                        newProfessor.setProfessor();
-                        professors.add(newProfessor);
+                        faculty.addProfessor();
                     }
-                    else if(option == 5){ // Add a new Subject
-                        Subject newSubject = new Subject();
-                        newSubject.setSubject();
-                        subjects.add(newSubject);
+                    else if(option == 5){ // Add a new group
+                        faculty.addGroup();
                     }
-                    else if(option == 6){ // Add a new Optional Subject
-                        OptionalSubject newOptionalSubject = new OptionalSubject();
-                        newOptionalSubject.setOptionalSubject();
-                        optionalSubjects.add(newOptionalSubject);
+                    else if(option == 6){ // Add a new series
+                        faculty.addSeries();
                     }
                     printSpaces(3);
                 }
@@ -198,8 +182,8 @@ public class Main {
                                     2. Print all subjects
                                     3. Print all optional subjects
                                     4. Print all professors
-                                    5. Print all series
-                                    6. Print all groups
+                                    5. Print all groups
+                                    6. Print all series
                                     0. back to the start menu
                                     """
                     );
@@ -207,29 +191,17 @@ public class Main {
                     if (option == 0) {
                         break;
                     } else if (option == 1) { // Print all students
-                        for (Student student : students) {
-                            System.out.println(student);
-                        }
+                        faculty.printStudents();
                     } else if (option == 2) { // Print all subjects
-                        for (Subject subject : subjects) {
-                            System.out.println(subject);
-                        }
+                        faculty.printSubjects();
                     } else if (option == 3) { // Print all optional subjects
-                        for (OptionalSubject optionalSubject : optionalSubjects) {
-                            System.out.println(optionalSubject);
-                        }
+                        faculty.printOptionalSubjects();
                     } else if (option == 4) { // Print all professors
-                        for (Professor professor : professors) {
-                            System.out.println(professor);
-                        }
-                    } else if (option == 5) { // Print all series
-                        for (Series objSeries : series) {
-                            System.out.println(objSeries);
-                        }
-                    } else if (option == 6) { // Print all groups
-                        for (Group group : groups) {
-                            System.out.println(group);
-                        }
+                        faculty.printProfessors();
+                    } else if (option == 5) { // Print all groups
+                        faculty.printGroups();
+                    } else if (option == 6) { // Print all series
+                        faculty.printSeries();
                     }
                     printSpaces(3);
                 }
