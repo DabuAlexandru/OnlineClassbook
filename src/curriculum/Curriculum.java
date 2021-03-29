@@ -70,4 +70,14 @@ public class Curriculum {
             System.out.println("!!!Student year or semester doesn't correspond to the curriculum!!!");
         }
     }
+
+    @Override
+    public String toString() {
+        return "Curriculum{" +
+                "major='" + major + '\'' +
+                ", year=" + year +
+                ", semester=" + semester +
+                ", req_credit=" + req_credit +
+                '}';
+    }
 }

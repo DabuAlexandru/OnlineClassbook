@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Faculty {
+public class Faculty { // singleton
 
     protected static class Specialization {
         String name;
@@ -104,5 +104,12 @@ public class Faculty {
         if (faculty == null)
             faculty = new Faculty(name, numOfSpecializations);
         return faculty;
+    }
+
+    @Override
+    public String toString() {
+        return "Faculty{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }
