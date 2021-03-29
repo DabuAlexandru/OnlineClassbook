@@ -2,6 +2,7 @@ package subject;
 
 import person.professor.Professor;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 import static java.lang.Math.max;
@@ -86,6 +87,19 @@ public class Subject {
                     ", grade=" + grade +
                     ", passing_grade=" + passing_grade +
                     '}';
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            StudyClass that = (StudyClass) o;
+            return Float.compare(that.weight, weight) == 0 && Float.compare(that.grade, grade) == 0 && Float.compare(that.passing_grade, passing_grade) == 0 && professor.equals(that.professor);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(professor, weight, grade, passing_grade);
         }
     }
 
@@ -346,5 +360,18 @@ public class Subject {
                 ", passing_grade=" + passing_grade +
                 ", credits=" + credits +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Subject subject = (Subject) o;
+        return name.equals(subject.name) && course.equals(subject.course) && seminar.equals(subject.seminar) && laboratory.equals(subject.laboratory);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, course, seminar, laboratory);
     }
 }

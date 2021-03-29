@@ -1,5 +1,6 @@
 package subject;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class OptionalSubject extends Subject {
@@ -48,5 +49,19 @@ public class OptionalSubject extends Subject {
             return 0;
         }
         return grade;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        OptionalSubject that = (OptionalSubject) o;
+        return graded == that.graded && slots_available == that.slots_available;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), graded, slots_available);
     }
 }

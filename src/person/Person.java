@@ -3,6 +3,7 @@ package person;
 import subject.OptionalSubject;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public abstract class Person {
@@ -120,5 +121,18 @@ public abstract class Person {
                 ", email='" + email + '\'' +
                 ", join_date='" + join_date + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return first_name.equals(person.first_name) && last_name.equals(person.last_name) && sex.equals(person.sex) && birth_date.equals(person.birth_date) && join_date.equals(person.join_date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(first_name, last_name, sex, birth_date, join_date);
     }
 }

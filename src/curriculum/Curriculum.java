@@ -6,6 +6,7 @@ import subject.Subject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Curriculum {
     String major;
@@ -20,6 +21,8 @@ public class Curriculum {
     List<Subject> obligatory = new ArrayList<>();
     List<OptionalSubject> optional = new ArrayList<>();
     List<OptionalSubject> facultative = new ArrayList<>();
+
+    public Curriculum() {}
 
     public Curriculum(String major, int year, int semester, int req_credit,
                       int num_of_obligatory_subjects, int num_of_optional_subjects, int num_of_facultative_subjects) {
@@ -79,5 +82,18 @@ public class Curriculum {
                 ", semester=" + semester +
                 ", req_credit=" + req_credit +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Curriculum that = (Curriculum) o;
+        return year == that.year && semester == that.semester && req_credit == that.req_credit && major.equals(that.major);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(major, year, semester, req_credit);
     }
 }

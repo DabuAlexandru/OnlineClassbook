@@ -80,13 +80,13 @@ public class Main {
                     System.out.println(
                             """
                                     Add a new item in the database
-                                    1. Add a new curriculum
-                                    2. Add a new series
-                                    3. Add a new group
-                                    4. Add a new student
-                                    5. Add a new professor
-                                    6. Add a new Subject
-                                    7. Add a new Optional Subject
+                                    1. Add a new series
+                                    2. Add a new group
+                                    3. Add a new student
+                                    4. Add a new professor
+                                    5. Add a new Subject
+                                    6. Add a new Optional Subject
+                                    7. Add a new curriculum
                                     0. back to the start menu
                                     """
                     );
@@ -94,35 +94,32 @@ public class Main {
                     if(option == 0) { // back to the start menu
                         break;
                     }
-                    else if(option == 1){ // Add a new curriculum
-
-                    }
-                    else if(option == 2){ // Add a new series
+                    else if(option == 1){ // Add a new series
                         Series newSeries = new Series();
                         newSeries.setSeries();
                         series.add(newSeries);
                     }
-                    else if(option == 3){ // Add a new group
+                    else if(option == 2){ // Add a new group
                         Group newGroup = new Group();
                         newGroup.setGroup();
                         groups.add(newGroup);
                     }
-                    else if(option == 4){ // Add a new student
+                    else if(option == 3){ // Add a new student
                         Student newStudent = new Student();
                         newStudent.setStudent();
                         students.add(newStudent);
                     }
-                    else if(option == 5){ // Add a new professor
+                    else if(option == 4){ // Add a new professor
                         Professor newProfessor = new Professor();
                         newProfessor.setProfessor();
                         professors.add(newProfessor);
                     }
-                    else if(option == 6){ // Add a new Subject
+                    else if(option == 5){ // Add a new Subject
                         Subject newSubject = new Subject();
                         newSubject.setSubject();
                         subjects.add(newSubject);
                     }
-                    else if(option == 7){ // Add a new Optional Subject
+                    else if(option == 6){ // Add a new Optional Subject
                         OptionalSubject newOptionalSubject = new OptionalSubject();
                         newOptionalSubject.setOptionalSubject();
                         optionalSubjects.add(newOptionalSubject);

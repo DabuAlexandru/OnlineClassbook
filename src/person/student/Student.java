@@ -6,6 +6,7 @@ import subject.Subject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Student extends Person {
@@ -83,5 +84,19 @@ public class Student extends Person {
                 ", semester=" + semester +
                 ", subjects=" + subjects +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Student student = (Student) o;
+        return year == student.year && semester == student.semester;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), year, semester);
     }
 }
