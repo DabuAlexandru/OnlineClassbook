@@ -50,7 +50,9 @@ public class Main {
 //        subj2.setGrades();
 //        System.out.println("Grade: " + subj2.calculateGrade());
 
-        Faculty faculty = Faculty.getFaculty("FMI", 2);
+        Faculty faculty = Faculty.getFaculty("FMI");
+        faculty.addSpecialization("Mathematics", 100, 50, 1000);
+        faculty.addSpecialization("Informatics", 200, 50, 1500);
 
         Scanner myInput = new Scanner(System.in);
         int option;
@@ -129,16 +131,99 @@ public class Main {
                         break;
                     }
                     else if(option == 1){ // Add a subject to a student
+                        int n, index = 0;
+                        System.out.println("Choose a subject to be added:");
+                        faculty.printSubjects();
+                        n = faculty.getNumOfSubjects();
+                        if(n == 0){
+                            System.out.println("No subjects available");
+                        }
+                        else {
+                            do {
+                                System.out.print("index: ");
+                                index = myInput.nextInt() - 1;
+                            } while (index < 0 || index > n - 1);
 
+                            System.out.println("\nChoose a student to add the subject to:");
+                            faculty.printStudents();
+                            n = faculty.getNumOfSubjects();
+                            if(n == 0){
+                                System.out.println("No students available");
+                            }
+                            else {
+                                Subject subject = faculty.getSubject(index);
+                                do {
+                                    System.out.print("index: ");
+                                    index = myInput.nextInt() - 1;
+                                } while (index < 0 || index > n - 1);
+                                Student student = faculty.getStudent(index);
+                                student.addSubject(subject);
+                            }
+                        }
                     }
                     else if(option == 2){ // Set a professor to a study class of a subject
 
                     }
-                    else if(option == 3){ // Set a group to a student
+                    else if(option == 3){ // Add a student to a group
+                        int n, index = 0;
+                        System.out.println("Choose a group to be set:");
+                        faculty.printGroups();
+                        n = faculty.getNumOfGroups();
+                        if(n == 0){
+                            System.out.println("No groups available");
+                        }
+                        else {
+                            do {
+                                System.out.print("index: ");
+                                index = myInput.nextInt() - 1;
+                            } while (index < 0 || index > n - 1);
 
+                            System.out.println("\nChoose a student to set the group to:");
+                            faculty.printStudents();
+                            n = faculty.getNumOfStudents();
+                            if(n == 0){
+                                System.out.println("No students available");
+                            }
+                            else {
+                                Group group = faculty.getGroup(index);
+                                do {
+                                    System.out.print("index: ");
+                                    index = myInput.nextInt() - 1;
+                                } while (index < 0 || index > n - 1);
+                                Student student = faculty.getStudent(index);
+                                student.setGroup(group);
+                            }
+                        }
                     }
                     else if(option == 4){ // Set a series to a group
-
+                        int n, index = 0;
+                        System.out.println("Choose a series to be set:");
+                        faculty.printSeries();
+                        n = faculty.getNumOfSeries();
+                        if(n == 0){
+                            System.out.println("No series available");
+                        }
+                        else {
+                            do {
+                                System.out.print("index: ");
+                                index = myInput.nextInt() - 1;
+                            } while (index < 0 || index > n - 1);
+                            System.out.println("\nChoose a Group to set the series to:");
+                            faculty.printGroups();
+                            n = faculty.getNumOfGroups();
+                            if(n == 0){
+                                System.out.println("No groups available");
+                            }
+                            else {
+                                Series series = faculty.getSeries(index);
+                                do {
+                                    System.out.print("index: ");
+                                    index = myInput.nextInt() - 1;
+                                } while (index < 0 || index > n - 1);
+                                Group group = faculty.getGroup(index);
+                                group.setSeries(series);
+                            }
+                        }
                     }
                     else if(option == 5){ // Generate random grades for some students
 

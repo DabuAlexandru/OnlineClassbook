@@ -64,10 +64,6 @@ public class Professor extends Person{
 
     @Override
     public String toString() {
-        return super.toString() +
-                "\nProfessor{" +
-                "rank=" + rank +
-                ", salary=" + salary +
-                '}';
+        return super.toString() + " : " + rank;
     }
 }

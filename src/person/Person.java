@@ -110,9 +110,8 @@ public abstract class Person {
         this.join_date = join_date;
     }
 
-    @Override
-    public String toString() {
-        return "Person{" +
+    public void printAdvancedInfo(){
+        System.out.println("Person{" +
                 "first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +
                 ", sex='" + sex + '\'' +
@@ -120,7 +119,12 @@ public abstract class Person {
                 ", phone_number='" + phone_number + '\'' +
                 ", email='" + email + '\'' +
                 ", join_date='" + join_date + '\'' +
-                '}';
+                '}');
+    }
+
+    @Override
+    public String toString() {
+        return first_name + ' ' + last_name;
     }
 
     @Override

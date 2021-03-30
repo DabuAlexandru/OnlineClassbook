@@ -8,9 +8,7 @@ import subject.OptionalSubject;
 import subject.Subject;
 
 import javax.swing.text.html.Option;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Faculty { // singleton
 
@@ -27,8 +25,14 @@ public class Faculty { // singleton
             setSpecialization();
         }
 
-        public void setSpecialization()
-        {
+        public Specialization(String name, int budgetaryCapacity, int taxCapacity, int taxPrice) {
+            this.name = name;
+            this.budgetaryCapacity = budgetaryCapacity;
+            this.taxCapacity = taxCapacity;
+            this.taxPrice = taxPrice;
+        }
+
+        public void setSpecialization() {
             Scanner myInput = new Scanner(System.in);
 
             System.out.println("\n--- Set specialization ---\n");
@@ -94,8 +98,7 @@ public class Faculty { // singleton
     }
 
     String name;
-    int numOfSpecializations;
-    List<Specialization> specializations = new ArrayList<Specialization>();
+    Set<Specialization> specializations = new HashSet<>();
 
     List<Student> students = new ArrayList<>();
     List<Subject> subjects = new ArrayList<>();
@@ -106,20 +109,43 @@ public class Faculty { // singleton
 
     private static Faculty faculty;
 
-    private Faculty(String name, int numOfSpecializations) {
+    private Faculty(String name) {
         this.name = name;
-        this.numOfSpecializations = numOfSpecializations;
-        for(int i = 0; i < numOfSpecializations; i++)
-        {
-            specializations.add(new Specialization());
-        }
     }
 
-    public static Faculty getFaculty(String name, int numOfSpecializations) {
+    public static Faculty getFaculty(String name) {
         if (faculty == null)
-            faculty = new Faculty(name, numOfSpecializations);
+            faculty = new Faculty(name);
         return faculty;
     }
+
+    public void addSpecialization(String name, int budgetaryCapacity, int taxCapacity, int taxPrice){
+        specializations.add(new Specialization(name, budgetaryCapacity, taxCapacity, taxPrice));
+    }
+
+    // get number of elements in a given list
+    public int getNumOfStudents(){ return students.size(); }
+    public int getNumOfSubjects(){ return subjects.size(); }
+    public int getNumOfOptionalSubjects(){ return optionalSubjects.size(); }
+    public int getNumOfProfessors(){ return professors.size(); }
+    public int getNumOfGroups(){ return groups.size(); }
+    public int getNumOfSeries(){ return series.size(); }
+
+    // get an object of a list
+    public Student getStudent(int index){ return students.get(index); }
+    public Subject getSubject(int index){ return subjects.get(index); }
+    public OptionalSubject getOptionalSubject(int index){ return optionalSubjects.get(index); }
+    public Professor getProfessor(int index){ return professors.get(index); }
+    public Group getGroup(int index){ return groups.get(index); }
+    public Series getSeries(int index){ return series.get(index); }
+
+    // remove an element of a list
+    public void removeStudent(int index){ students.remove(index); }
+    public void removeSubject(int index){ subjects.remove(index); }
+    public void removeOptionalSubject(int index){ optionalSubjects.remove(index); }
+    public void removeProfessor(int index){ professors.remove(index); }
+    public void removeGroup(int index){ groups.remove(index); }
+    public void removeSeries(int index){ series.remove(index); }
 
     // add elements
 
@@ -197,6 +223,50 @@ public class Faculty { // singleton
     }
 
     public void printGroups(){
+        int i = 0;
+        for (Group group : groups) {
+            System.out.println(++i + ": " + group);
+        }
+    }
+
+    // print elements of a given list
+
+    public void printStudents(List<Student> students){
+        int i = 0;
+        for (Student student : students) {
+            System.out.println(++i + ": " + student);
+        }
+    }
+
+    public void printSubjects(List<Subject> subjects){
+        int i = 0;
+        for (Subject subject : subjects) {
+            System.out.println(++i + ": " + subject);
+        }
+    }
+
+    public void printOptionalSubjects(List<OptionalSubject> optionalSubjects){
+        int i = 0;
+        for (OptionalSubject optionalSubject : optionalSubjects) {
+            System.out.println(++i + ": " + optionalSubject);
+        }
+    }
+
+    public void printProfessors(List<Professor> professors){
+        int i = 0;
+        for (Professor professor : professors) {
+            System.out.println(++i + ": " + professor);
+        }
+    }
+
+    public void printSeries(List<Series> series){
+        int i = 0;
+        for (Series objSeries : series) {
+            System.out.println(++i + ": " + objSeries);
+        }
+    }
+
+    public void printGroups(List<Group> groups){
         int i = 0;
         for (Group group : groups) {
             System.out.println(++i + ": " + group);

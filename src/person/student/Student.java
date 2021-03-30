@@ -1,26 +1,26 @@
 package person.student;
 
+import faculty.group.Group;
 import person.Person;
 import subject.OptionalSubject;
 import subject.Subject;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class Student extends Person {
 
-    int year = 0;
-    int semester = 0;
-
-    List<Subject> subjects = new ArrayList<>();
+    int year;
+    int semester;
+    Group group;
+    Set<Subject> subjects;
 
     public Student() {
-        setStudent();
+        year = 0;
+        semester = 0;
+        subjects = new HashSet<Subject>();
     }
 
-    public Student(String first_name, String last_name, String sex, String birth_date, String phone_number, String email, String join_date, int year, int semester, List<Subject> subjects) {
+    public Student(String first_name, String last_name, String sex, String birth_date, String phone_number, String email, String join_date, int year, int semester, Set<Subject> subjects) {
         super(first_name, last_name, sex, birth_date, phone_number, email, join_date);
         this.year = year;
         this.semester = semester;
@@ -28,13 +28,14 @@ public class Student extends Person {
     }
 
     public Student(String first_name, String last_name, String birth_date, String join_date, String email,
-                   int year, int semester, List<Subject> subjects) {
+                   int year, int semester, Set<Subject> subjects) {
         this.year = year;
         this.semester = semester;
         this.subjects = subjects;
     }
 
     public void setStudent() {
+        super.setPerson();
         Scanner myInput = new Scanner(System.in);
 
         System.out.println("Enter year: ");
@@ -43,6 +44,14 @@ public class Student extends Person {
         System.out.println("Enter semester: ");
         this.semester = myInput.nextInt();
 
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public int getYear() {
@@ -61,11 +70,11 @@ public class Student extends Person {
         this.semester = semester;
     }
 
-    public List<Subject> getSubjects() {
+    public Set<Subject> getSubjects() {
         return subjects;
     }
 
-    public void setSubjects(List<Subject> subjects) {
+    public void setSubjects(Set<Subject> subjects) {
         this.subjects = subjects;
     }
 
@@ -77,13 +86,20 @@ public class Student extends Person {
         this.subjects.add(subject);
     }
 
+    public void removeSubject(Subject subject){ this.subjects.remove(subject); }
+
     @Override
     public String toString() {
-        return super.toString() + "\nStudent{" +
-                "year=" + year +
-                ", semester=" + semester +
-                ", subjects=" + subjects +
-                '}';
+        if(group == null)
+        {
+            return super.toString() + " : Student" +
+                    "\nYear: " + this.year +
+                    " || Semester: " + this.semester + '\n';
+        }
+        return super.toString() + " : Student" +
+                "\nYear: " + this.year +
+                " || Semester: " + this.semester +
+                " || "+ this.group.toString() + '\n';
     }
 
     @Override

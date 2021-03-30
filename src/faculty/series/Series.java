@@ -3,26 +3,19 @@ package faculty.series;
 import faculty.group.Group;
 import person.student.Student;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class Series {
     String name;
-    int numberOfGroups;
-    List<Group> groups;
+    Set<Group> groups;
 
     public Series() {
         name = "";
-        numberOfGroups = 0;
-        groups = new ArrayList<Group>();
+        groups = new HashSet<>();
     }
 
-    public Series(String name, int numberOfGroups) {
+    public Series(String name) {
         this.name = name;
-        this.numberOfGroups = numberOfGroups;
-        setGroups();
     }
 
     public void setSeries()
@@ -34,15 +27,9 @@ public class Series {
         System.out.println();
     }
 
-    public void setGroups() {
-        if(numberOfGroups == 0) {
-            Scanner myInput = new Scanner(System.in);
-            System.out.print("numberOfGroups = ");
-            this.numberOfGroups = myInput.nextInt();
-        }
-        for(int i = 0; i < numberOfGroups; i++) {
-            Group group = new Group();
-            group.setGroup();
+    public void addGroup(Group group){
+        if(group.getSeries() == null){
+            group.setSeries(this);
             this.groups.add(group);
         }
     }
@@ -55,27 +42,17 @@ public class Series {
         this.name = name;
     }
 
-    public int getNumberOfGroups() {
-        return numberOfGroups;
-    }
-
-    public void setNumberOfGroups(int numberOfGroups) {
-        this.numberOfGroups = numberOfGroups;
-    }
-
-    public List<Group> getGroups() {
+    public Set<Group> getGroups() {
         return groups;
     }
 
-    public void setGroups(List<Group> groups) {
+    public void setGroups(Set<Group> groups) {
         this.groups = groups;
     }
 
     @Override
     public String toString() {
-        return "Series{" +
-                "name='" + name + '\'' +
-                '}';
+        return "series " + name;
     }
 
     @Override

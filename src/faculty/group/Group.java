@@ -1,27 +1,23 @@
 package faculty.group;
 
+import faculty.series.Series;
 import person.student.Student;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class Group {
     String name;
-    int numberOfStudents;
-    List<Student> students;
+    Series series;
+    Set<Student> students;
 
     public Group() {
         name = "";
-        numberOfStudents = 0;
-        students = new ArrayList<>();
+        students = new HashSet<>();
     }
 
-    public Group(String name, int numberOfStudents) {
+    public Group(String name, Set<Student> students) {
         this.name = name;
-        this.numberOfStudents = numberOfStudents;
-        setStudents();
+        this.students = students;
     }
 
     public void setGroup() {
@@ -32,17 +28,19 @@ public class Group {
         System.out.println();
     }
 
-    public void setStudents() {
-        if(numberOfStudents == 0) {
-            Scanner myInput = new Scanner(System.in);
-            System.out.print("numberOfStudents = ");
-            this.numberOfStudents = myInput.nextInt();
-        }
-        for(int i = 0; i < numberOfStudents; i++) {
-            Student student = new Student();
-            student.setStudent();
+    public void addStudent(Student student){
+        if(student.getGroup() == null){
+            student.setGroup(this);
             this.students.add(student);
         }
+    }
+
+    public Series getSeries() {
+        return series;
+    }
+
+    public void setSeries(Series series) {
+        this.series = series;
     }
 
     public String getName() {
@@ -53,27 +51,18 @@ public class Group {
         this.name = name;
     }
 
-    public int getNumberOfStudents() {
-        return numberOfStudents;
-    }
-
-    public void setNumberOfStudents(int numberOfStudents) {
-        this.numberOfStudents = numberOfStudents;
-    }
-
-    public List<Student> getStudents() {
+    public Set<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(List<Student> students) {
+    public void setStudents(Set<Student> students) {
         this.students = students;
     }
 
     @Override
     public String toString() {
-        return "Group{" +
-                "name='" + name + '\'' +
-                '}';
+        if(series == null){ return "group " + name; }
+        return "group " + name + " : " + series.toString();
     }
 
     @Override
