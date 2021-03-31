@@ -33,8 +33,8 @@ Action permitted as of this moment:
     3. Set a group to a student
     4. Set a series to a group
 3. Show specific information of an item
-    1. Print all groups of a series in a sorted matter
-    2. Print all students of a group in a sorted matter
+    1. Print all groups of a series in a sorted matter (by name)
+    2. Print all students of a group in a sorted matter (by firstName and lastName)
     3. Print all subjects of a student
 4. Remove an item from the database
    1. Remove a student

@@ -282,8 +282,8 @@ public class Menu {
             System.out.println(
                     """
                             Add some information for an existing item
-                            1. Print all groups of a series in a sorted matter
-                            2. Print all students of a group in a sorted matter
+                            1. Print all groups of a series in a sorted matter (by name)
+                            2. Print all students of a group in a sorted matter (by firstName and lastName)
                             3. Print all subjects of a student
                             0. back to the start menu
                             """
