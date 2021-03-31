@@ -1,7 +1,22 @@
 "# OnlineClassbook" 
 
-Platform for the interaction with a school's database. It started out as a class book, but it might come to being one 
-as well sometime.
+Platform for the interaction with a University's database. It started out as a class book, but it might contain 
+this functionality as well, sometime in the future.
+
+Classes available:
+* *Faculty* - singleton; has the role of a service class
+    * :: has interval class *Specialization*
+* *Menu* - menu class for organising the output data
+* *Person* - abstract class; represents a person
+    * *Student*
+    * *Professor*
+* *Group* - represents a group of students (a "classroom")
+* *Series* - represents a group of groups
+* *Curriculum* - it's a class for organizing Subjects (implementation still ongoing)
+* *Subject*
+    * :: has internal class: *StudyClass*
+    * *Optional Subject* - subject that is not mandatory, has a limited capacity and its grade can contribute
+      to the GPA or not
 
 Action permitted as of this moment:
 1. Add a new item in the database
@@ -37,18 +52,3 @@ Action permitted as of this moment:
     5. Print all groups
     6. Print all series
     7. Print all curricula
-    
-Classes available:
-* *Faculty* - singleton; has the role of a service class
-  * :: has interval class *Specialization*
-* *Menu* - menu class for organising the output data
-* *Person* - abstract class; represents a person
-    * *Student*
-    * *Professor*
-* *Group* - represents a group of students (a "classroom")
-* *Series* - represents a group of groups
-* *Curriculum* - it's a class for organizing Subjects (implementation still ongoing)
-* *Subject* 
-    * :: has internal class: *StudyClass*
-    * *Optional Subject* - subject that is not mandatory, has a limited capacity and its grade can contribute
-    to the GPA or not
