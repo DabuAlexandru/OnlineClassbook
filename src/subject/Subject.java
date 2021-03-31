@@ -5,26 +5,26 @@ import person.professor.Professor;
 import java.util.Objects;
 import java.util.Scanner;
 
-import static java.lang.Math.max;
+import static java.lang.Math.*;
 
 public class Subject {
 
-    protected static class StudyClass {
-        Professor professor = new Professor();
+    public static class StudyClass {
+        Professor professor;
         float weight; // percentage of the final grade
         float grade; // the grade of the student
-        float passing_grade; // the minimum grade for the class
+        float passingGrade; // the minimum grade for the class
 
         public StudyClass() {
             weight = 0;
-            passing_grade = -1;
+            passingGrade = -1;
         }
 
-        public StudyClass(Professor professor, float weight, float grade, float passing_grade) {
+        public StudyClass(Professor professor, float weight, float grade, float passingGrade) {
             this.professor = professor;
             this.weight = weight;
             this.grade = grade;
-            this.passing_grade = passing_grade;
+            this.passingGrade = passingGrade;
         }
 
         public void setStudyClass()
@@ -34,21 +34,29 @@ public class Subject {
             System.out.print("Enter weight: ");
             this.weight = myInput.nextFloat();
 
-            System.out.print("Enter passing_grade: ");
-            this.passing_grade = myInput.nextFloat();
+            System.out.print("Enter passingGrade: ");
+            this.passingGrade = myInput.nextFloat();
         }
 
-        public void setStudyClass(float weight, float passing_grade) {
+        public Boolean hasPassed() {
+            return (!this.isValid()) || (grade > passingGrade);
+        }
+
+        public Boolean isValid() {
+            return (this.passingGrade != -1);
+        }
+
+        public void setStudyClass(float weight, float passingGrade) {
             this.weight = weight;
-            this.passing_grade = passing_grade;
+            this.passingGrade = passingGrade;
         }
 
-        public float getPassing_grade() {
-            return passing_grade;
+        public float getPassingGrade() {
+            return passingGrade;
         }
 
-        public void setPassing_grade(float passing_grade) {
-            this.passing_grade = passing_grade;
+        public void setPassingGrade(float passingGrade) {
+            this.passingGrade = passingGrade;
         }
 
         public Professor getProfessor() {
@@ -63,7 +71,7 @@ public class Subject {
             return weight;
         }
 
-        public void setWeight(float weight) {
+        protected void setWeight(float weight) {
             this.weight = weight;
         }
 
@@ -81,12 +89,15 @@ public class Subject {
 
         @Override
         public String toString() {
-            return "StudyClass{" +
-                    "professor=" + professor +
-                    ", weight=" + weight +
-                    ", grade=" + grade +
-                    ", passing_grade=" + passing_grade +
-                    '}';
+            if(professor == null){
+                return  " weight = " + weight +
+                        ", grade = " + grade +
+                        ", passingGrade = " + passingGrade;
+            }
+            return  " professor = " + professor +
+                    ", weight = " + weight +
+                    ", grade = " + grade +
+                    ", passingGrade = " + passingGrade;
         }
 
         @Override
@@ -94,12 +105,12 @@ public class Subject {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             StudyClass that = (StudyClass) o;
-            return Float.compare(that.weight, weight) == 0 && Float.compare(that.grade, grade) == 0 && Float.compare(that.passing_grade, passing_grade) == 0 && professor.equals(that.professor);
+            return Float.compare(that.weight, weight) == 0 && Float.compare(that.grade, grade) == 0 && Float.compare(that.passingGrade, passingGrade) == 0 && professor.equals(that.professor);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(professor, weight, grade, passing_grade);
+            return Objects.hash(professor, weight, grade, passingGrade);
         }
     }
 
@@ -110,10 +121,10 @@ public class Subject {
     StudyClass laboratory;
 
     int grade;
-    float passing_grade;
+    float passingGrade;
     int credits;
 
-    protected int current_weight = 0;
+    protected int currentWeight = 0;
 
     public Subject() {
         this.name = "";
@@ -121,7 +132,7 @@ public class Subject {
         this.seminar = new StudyClass();
         this.laboratory = new StudyClass();
         this.grade = 1;
-        this.passing_grade = 5;
+        this.passingGrade = 5;
         this.credits = 1;
     }
 
@@ -132,37 +143,32 @@ public class Subject {
         this.laboratory = optSubject.laboratory;
 
         this.grade = optSubject.grade;
-        this.passing_grade = optSubject.passing_grade;
+        this.passingGrade = optSubject.passingGrade;
         this.credits = optSubject.getCredits();
     }
 
-    public Subject(String name, StudyClass course, StudyClass seminar, StudyClass laboratory, int grade, float passing_grade, int credits) {
+    public Subject(String name, StudyClass course, StudyClass seminar, StudyClass laboratory, int grade, float passingGrade, int credits) {
         this.name = name;
         this.course = course;
         this.seminar = seminar;
         this.laboratory = laboratory;
         this.grade = grade;
-        this.passing_grade = passing_grade;
+        this.passingGrade = passingGrade;
         this.credits = credits;
     }
 
-    protected void checkWeight(float weight) {
-        if(weight + this.current_weight > 1)
-        {
-            this.course.setWeight(1 - weight);
-            this.current_weight = 1;
-        }
-        else
-        {
-            this.current_weight += weight;
-        }
+    public Boolean hasPassed() {
+        return course.hasPassed() && seminar.hasPassed() && laboratory.hasPassed() && (grade >= passingGrade);
     }
 
     protected void normalizeWeight() {
-        float ratio = current_weight / (course.weight + seminar.weight + laboratory.weight);
-        course.weight *= ratio;
-        seminar.weight *= ratio;
-        laboratory.weight *= ratio;
+        course.weight = abs(course.weight);
+        seminar.weight = abs(seminar.weight);
+        laboratory.weight = abs(laboratory.weight);
+        float sum = course.weight + seminar.weight + laboratory.weight;
+        course.weight /= sum;
+        seminar.weight /= sum;
+        laboratory.weight /= sum;
     }
 
     public void setSubject() {
@@ -173,33 +179,23 @@ public class Subject {
 
         System.out.println("Course: ");
         this.course.setStudyClass();
-        checkWeight(course.getWeight());
 
         System.out.print("Does it have a seminar? (Y/N): ");
         String aux;
         aux = myInput.nextLine();
-        if(aux.equals("Y") || aux.equals("Yes"))
-        {
+        if(aux.equals("Y") || aux.equals("Yes")) {
             System.out.println("Seminar:");
             this.seminar.setStudyClass();
-            checkWeight(seminar.getWeight());
-            /* if the weight of the course + the weight of the seminar are greater than 1
-            then the seminar will have to take the rest to 1, and the laboratory will have a weight of 0
-             */
 
             System.out.print("Does it have a laboratory? (Y/N): ");
             aux = myInput.nextLine();
             if (aux.equals("Y") || aux.equals("Yes")) {
                 System.out.println("Laboratory:");
                 this.laboratory.setStudyClass();
-                checkWeight(laboratory.getWeight());
             }
-        }
-        else
-        {
+        } else {
             System.out.println("Laboratory:");
             this.laboratory.setStudyClass();
-            checkWeight(laboratory.getWeight());
         }
         normalizeWeight();
     }
@@ -240,88 +236,83 @@ public class Subject {
         return grade;
     }
 
-    public void setGrades(){
+    public void readGrades(){
         Scanner myInput = new Scanner(System.in);
         System.out.print("Enter course grade: ");
-        this.course.grade = max(myInput.nextFloat(), 10);
+        this.course.grade = min(max(myInput.nextFloat(), 0), 10);
 
-        if(seminar.passing_grade >= 0) {
+        if(seminar.passingGrade >= 0) {
             System.out.print("Enter seminar grade: ");
-            this.seminar.grade = max(myInput.nextFloat(), 10);
+            this.seminar.grade = min(max(myInput.nextFloat(), 0), 10);
         }
 
-        if(laboratory.passing_grade >= 0) {
+        if(laboratory.passingGrade >= 0) {
             System.out.print("Enter laboratory grade: ");
-            this.laboratory.grade = max(myInput.nextFloat(), 10);
+            this.laboratory.grade = min(max(myInput.nextFloat(), 0), 10);
         }
     }
-
+    public void setGrades(float courseGrade, float seminarGrade, float laboratoryGrade) {
+        this.course.setGrade(courseGrade);
+        if(this.seminar.isValid()){
+            this.seminar.setGrade(seminarGrade);
+        }
+        if(this.laboratory.isValid()){
+            this.laboratory.setGrade(laboratoryGrade);
+        }
+    }
     public void setGrade(int grade) {
         this.grade = grade;
     }
 
-    public void setCourse()
-    {
-        this.course = new StudyClass();
+    public void setCourse() { this.course = new StudyClass(); }
+    public void setSeminar() { this.seminar = new StudyClass(); }
+    public void setLaboratory() { this.laboratory = new StudyClass(); }
+
+    public void setCourseGrade(float grade) { this.course.setGrade(grade); }
+    public void setSeminarGrade(float grade) { this.seminar.setGrade(grade); }
+    public void setLaboratoryGrade(float grade) { this.laboratory.setGrade(grade); }
+
+    public void setCoursePassingGrade(float passingGrade) { this.course.setPassingGrade(passingGrade); }
+    public void setSeminarPassingGrade(float passingGrade) { this.seminar.setPassingGrade(passingGrade); }
+    public void setLaboratoryPassingGrade(float passingGrade) { this.laboratory.setPassingGrade(passingGrade); }
+
+    public void setWeights(float courseWeight, float seminarWeight, float laboratoryWeight){
+        this.currentWeight = 0;
+        this.course.setWeight(courseWeight);
+        if(this.seminar.isValid()){
+            this.seminar.setWeight(seminarWeight);
+        }
+        if(this.course.isValid()){
+            this.laboratory.setWeight(laboratoryWeight);
+        }
+        this.normalizeWeight();
     }
 
-    public void setSeminar()
-    {
-        this.seminar = new StudyClass();
+    public void setCourseWeight(float weight) { this.course.setWeight(weight); }
+    public void setSeminarWeight(float weight) { this.seminar.setWeight(weight); }
+    public void setLaboratoryWeight(float weight) { this.laboratory.setWeight(weight); }
+
+    public float getPassingGrade() {
+        return passingGrade;
     }
 
-    public void setLaboratory()
-    {
-        this.laboratory = new StudyClass();
-    }
-
-    public void setCourseGrade(float grade) {
-        this.course.setGrade(grade);
-    }
-
-    public void setSeminarGrade(float grade) {
-        this.seminar.setGrade(grade);
-    }
-
-    public void setLaboratoryGrade(float grade) {
-        this.laboratory.setGrade(grade);
-    }
-
-    public void setCourseWeight(float weight) {
-        this.course.setWeight(weight);
-    }
-
-    public void setSeminarWeight(float weight) {
-        this.seminar.setWeight(weight);
-    }
-
-    public void setLaboratoryWeight(float weight) {
-        this.laboratory.setWeight(weight);
-    }
-
-    public float getPassing_grade() {
-        return passing_grade;
-    }
-
-    public void setPassing_grade(int passing_grade) {
-        this.passing_grade = passing_grade;
+    public void setPassingGrade(int passingGrade) {
+        this.passingGrade = passingGrade;
     }
 
     public int calculateGrade()
     {
-        if(seminar != null && laboratory != null) {
+        if(seminar.isValid() && laboratory.isValid()) {
             return (int) (course.getWeightedGrade()
                     + seminar.getWeightedGrade()
                     + laboratory.getWeightedGrade() + 0.5);
         }
-        else if(seminar != null) {
+        else if(seminar.isValid()) {
             return (int) (course.getWeightedGrade()
                     + seminar.getWeightedGrade() + 0.5);
         }
-        else {
-            return (int) (course.getWeightedGrade()
-                    + laboratory.getWeightedGrade() + 0.5);
-        }
+        return (int) (course.getWeightedGrade()
+                + laboratory.getWeightedGrade() + 0.5);
     }
 
     public void setGrade(float course_grade, float seminar_grade, float laboratory_grade) {
@@ -341,25 +332,31 @@ public class Subject {
 
     @Override
     public String toString() {
-        if(laboratory == null) {
-            return "Subject{" +
-                    "name='" + name + '\'' +
-                    ", course=" + course +
-                    ", seminar=" + seminar +
-                    ", grade=" + grade +
-                    ", passing_grade=" + passing_grade +
+        if(!(laboratory.isValid())) {
+            return name + " ::: " +
+                    " grade=" + grade +
+                    ", passingGrade=" + passingGrade +
                     ", credits=" + credits +
-                    '}';
+                    "\ncourse: " + course +
+                    "\nseminar: " + seminar;
         }
 
-        return "Subject{" +
-                "name='" + name + '\'' +
-                ", course=" + course +
-                ", laboratory=" + laboratory +
-                ", grade=" + grade +
-                ", passing_grade=" + passing_grade +
+        if(!(seminar.isValid())) {
+            return name + " ::: " +
+                    " grade=" + grade +
+                    ", passingGrade=" + passingGrade +
+                    ", credits=" + credits +
+                    "\ncourse: " + course +
+                    "\nlaboratory: " + laboratory;
+        }
+
+        return name + " ::: " +
+                " grade=" + grade +
+                ", passingGrade=" + passingGrade +
                 ", credits=" + credits +
-                '}';
+                "\ncourse: " + course +
+                "\nseminar: " + seminar +
+                "\nlaboratory: " + laboratory;
     }
 
     @Override

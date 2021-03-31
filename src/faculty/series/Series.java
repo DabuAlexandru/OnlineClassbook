@@ -7,11 +7,11 @@ import java.util.*;
 
 public class Series {
     String name;
-    Set<Group> groups;
+    TreeSet<Group> groups;
 
     public Series() {
         name = "";
-        groups = new HashSet<>();
+        groups = new TreeSet<>();
     }
 
     public Series(String name) {
@@ -34,6 +34,13 @@ public class Series {
         }
     }
 
+    public void removeGroup(Group group){
+        if(group.getSeries() == this){
+            group.setSeries(null);
+            this.groups.remove(group);
+        }
+    }
+
     public String getName() {
         return name;
     }
@@ -42,11 +49,11 @@ public class Series {
         this.name = name;
     }
 
-    public Set<Group> getGroups() {
+    public TreeSet<Group> getGroups() {
         return groups;
     }
 
-    public void setGroups(Set<Group> groups) {
+    public void setGroups(TreeSet<Group> groups) {
         this.groups = groups;
     }
 

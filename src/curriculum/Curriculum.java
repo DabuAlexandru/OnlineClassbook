@@ -4,9 +4,7 @@ import person.student.Student;
 import subject.OptionalSubject;
 import subject.Subject;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Curriculum {
     String major;
@@ -14,40 +12,36 @@ public class Curriculum {
     int semester;
 	int req_credit;
 
-    int num_of_obligatory_subjects;
-    int num_of_optional_subjects;
-    int num_of_facultative_subjects;
-
-    List<Subject> obligatory = new ArrayList<>();
-    List<OptionalSubject> optional = new ArrayList<>();
-    List<OptionalSubject> facultative = new ArrayList<>();
+    Set<Subject> obligatory;
+    Set<OptionalSubject> optional;
 
     public Curriculum() {}
 
-    public Curriculum(String major, int year, int semester, int req_credit,
-                      int num_of_obligatory_subjects, int num_of_optional_subjects, int num_of_facultative_subjects) {
+    public Curriculum(String major, int year, int semester, int req_credit) {
         this.major = major;
         this.year = year;
         this.semester = semester;
         this.req_credit = req_credit;
-        this.num_of_obligatory_subjects = num_of_obligatory_subjects;
-        this.num_of_optional_subjects = num_of_optional_subjects;
-        this.num_of_facultative_subjects = num_of_facultative_subjects;
+        obligatory = new HashSet<>();
+        optional = new HashSet<>();
+    }
 
-        for(int i = 0; i < num_of_obligatory_subjects; i++)
-        {
-            obligatory.add(new Subject());
-        }
+    public void setCurriculum(){
+        Scanner myInput = new Scanner(System.in);
+        System.out.println("Curriculum:");
+        System.out.print("major = ");
+        this.major = myInput.next();
+        System.out.print("year = ");
+        this.year = myInput.nextInt();
+        System.out.print("semester = ");
+        this.semester = myInput.nextInt();
+        System.out.print("required credits = ");
+        this.req_credit = myInput.nextInt();
+        System.out.println();
+    }
 
-        for(int i = 0; i < num_of_optional_subjects; i++)
-        {
-            optional.add(new OptionalSubject());
-        }
-
-        for(int i = 0; i < num_of_facultative_subjects; i++)
-        {
-            facultative.add(new OptionalSubject());
-        }
+    public Set<Subject> getObligatory(){
+        return this.obligatory;
     }
 
     public void appendCurriculum(Student student){
@@ -59,13 +53,8 @@ public class Curriculum {
         else if((student.getYear() == year) && (student.getSemester() == semester))
         {
             student.addSubjects(obligatory);
-
             for(OptionalSubject optSubj : optional) {
                 student.addSubject(new Subject(optSubj));
-            }
-
-            for(OptionalSubject facultSubj : facultative) {
-                student.addSubject(new Subject(facultSubj));
             }
         }
         else
@@ -76,12 +65,11 @@ public class Curriculum {
 
     @Override
     public String toString() {
-        return "Curriculum{" +
-                "major='" + major + '\'' +
-                ", year=" + year +
-                ", semester=" + semester +
-                ", req_credit=" + req_credit +
-                '}';
+        return "Curriculum ::: " +
+                "major = " + major +
+                "\nyear = " + year +
+                ", semester = " + semester +
+                ", req_credit=" + req_credit;
     }
 
     @Override

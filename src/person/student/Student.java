@@ -78,7 +78,7 @@ public class Student extends Person {
         this.subjects = subjects;
     }
 
-    public void addSubjects(List<Subject> subjects) {
+    public void addSubjects(Set<Subject> subjects) {
         this.subjects.addAll(subjects);
     }
 
@@ -115,4 +115,6 @@ public class Student extends Person {
     public int hashCode() {
         return Objects.hash(super.hashCode(), year, semester);
     }
+
+
 }

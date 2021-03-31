@@ -1,21 +1,22 @@
 package faculty.group;
 
 import faculty.series.Series;
+import person.Person;
 import person.student.Student;
 
 import java.util.*;
 
-public class Group {
+public class Group implements Comparable<Group>{
     String name;
     Series series;
-    Set<Student> students;
+    TreeSet<Student> students;
 
     public Group() {
         name = "";
-        students = new HashSet<>();
+        students = new TreeSet<>();
     }
 
-    public Group(String name, Set<Student> students) {
+    public Group(String name, TreeSet<Student> students) {
         this.name = name;
         this.students = students;
     }
@@ -35,6 +36,13 @@ public class Group {
         }
     }
 
+    public void removeStudent(Student student){
+        if(student.getGroup() == this){
+            student.setGroup(null);
+            this.students.remove(student);
+        }
+    }
+
     public Series getSeries() {
         return series;
     }
@@ -51,11 +59,11 @@ public class Group {
         this.name = name;
     }
 
-    public Set<Student> getStudents() {
+    public TreeSet<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(Set<Student> students) {
+    public void setStudents(TreeSet<Student> students) {
         this.students = students;
     }
 
@@ -76,5 +84,10 @@ public class Group {
     @Override
     public int hashCode() {
         return Objects.hash(name);
+    }
+
+    @Override
+    public int compareTo(Group o) {
+        return this.getName().compareTo(o.getName());
     }
 }

@@ -1,5 +1,6 @@
 package faculty;
 
+import curriculum.Curriculum;
 import faculty.group.Group;
 import faculty.series.Series;
 import person.professor.Professor;
@@ -100,6 +101,7 @@ public class Faculty { // singleton
     String name;
     Set<Specialization> specializations = new HashSet<>();
 
+    List<Curriculum> curricula = new ArrayList<>();
     List<Student> students = new ArrayList<>();
     List<Subject> subjects = new ArrayList<>();
     List<OptionalSubject> optionalSubjects = new ArrayList<>();
@@ -124,6 +126,7 @@ public class Faculty { // singleton
     }
 
     // get number of elements in a given list
+    public int getNumOfCurricula(){ return curricula.size(); }
     public int getNumOfStudents(){ return students.size(); }
     public int getNumOfSubjects(){ return subjects.size(); }
     public int getNumOfOptionalSubjects(){ return optionalSubjects.size(); }
@@ -132,6 +135,7 @@ public class Faculty { // singleton
     public int getNumOfSeries(){ return series.size(); }
 
     // get an object of a list
+    public Curriculum getCurriculum(int index){ return curricula.get(index); }
     public Student getStudent(int index){ return students.get(index); }
     public Subject getSubject(int index){ return subjects.get(index); }
     public OptionalSubject getOptionalSubject(int index){ return optionalSubjects.get(index); }
@@ -140,14 +144,91 @@ public class Faculty { // singleton
     public Series getSeries(int index){ return series.get(index); }
 
     // remove an element of a list
-    public void removeStudent(int index){ students.remove(index); }
-    public void removeSubject(int index){ subjects.remove(index); }
+    public void removeCurriculum(int index){
+        curricula.remove(index);
+    }
+    public void removeCurriculum(Curriculum curriculum){
+        curricula.remove(curriculum);
+    }
+
+    public void removeStudent(int index){
+        Student student = students.get(index);
+        removeStudent(student);
+    }
+    public void removeStudent(Student student){
+        Group group = student.getGroup();
+        group.removeStudent(student);
+        students.remove(student);
+    }
+
+    public void removeSubject(int index){
+        Subject subject = getSubject(index);
+        removeSubject(subject);
+    }
+    public void removeSubject(Subject subject){
+        for(Student student : this.students) {
+            student.removeSubject(subject);
+        }
+        for(Curriculum curriculum : this.curricula) {
+            curriculum.getObligatory().remove(subject);
+        }
+        this.subjects.remove(subject);
+    }
+
     public void removeOptionalSubject(int index){ optionalSubjects.remove(index); }
-    public void removeProfessor(int index){ professors.remove(index); }
-    public void removeGroup(int index){ groups.remove(index); }
-    public void removeSeries(int index){ series.remove(index); }
+    public void removeOptionalSubject(OptionalSubject optionalSubject){ optionalSubjects.remove(optionalSubject); }
+
+    public void removeProfessor(int index){
+        Professor professor = getProfessor(index);
+        removeProfessor(professor);
+    }
+    public void removeProfessor(Professor professor){
+        for(Subject subject : this.subjects) {
+            if(subject.getCourse().getProfessor() == professor){
+                subject.getCourse().setProfessor(null);
+            }
+            if(subject.getSeminar().getProfessor() == professor){
+                subject.getSeminar().setProfessor(null);
+            }
+            if(subject.getLaboratory().getProfessor() == professor){
+                subject.getLaboratory().setProfessor(null);
+            }
+        }
+        professors.remove(professor);
+    }
+
+    public void removeGroup(int index){
+        Group group = getGroup(index);
+        removeGroup(group);
+    }
+    public void removeGroup(Group group){
+        TreeSet<Student> students = group.getStudents();
+        for(Student student : students){
+            student.setGroup(null);
+            group.removeStudent(student);
+        }
+        this.groups.remove(group);
+    }
+
+    public void removeSeries(int index){
+        Series series = getSeries(index);
+        removeSeries(series);
+    }
+    public void removeSeries(Series series){
+        TreeSet<Group> groups = series.getGroups();
+        for(Group group : groups) {
+            group.setSeries(null);
+            series.removeGroup(group);
+        }
+        this.series.remove(series);
+    }
 
     // add elements
+    public void addCurriculum() {
+        Curriculum newCurriculum = new Curriculum();
+        newCurriculum.setCurriculum();
+        curricula.add(newCurriculum);
+    }
 
     public void addStudent(){
         Student newStudent = new Student();
@@ -186,6 +267,13 @@ public class Faculty { // singleton
     }
 
     // print elements
+
+    public void printCurricula(){
+        int i = 0;
+        for (Curriculum curriculum : curricula) {
+            System.out.println(++i + ": " + curriculum);
+        }
+    }
 
     public void printStudents(){
         int i = 0;
@@ -229,47 +317,29 @@ public class Faculty { // singleton
         }
     }
 
-    // print elements of a given list
+    // print specific items
 
-    public void printStudents(List<Student> students){
+    public void printGroupsOfSeries(Series series){
+        TreeSet<Group> groups = series.getGroups();
         int i = 0;
-        for (Student student : students) {
+        for(Group group : groups){
+            System.out.println(++i + ": " + group);
+        }
+    }
+
+    public void printStudentsOfGroup(Group group){
+        TreeSet<Student> students = group.getStudents();
+        int i = 0;
+        for(Student student : students){
             System.out.println(++i + ": " + student);
         }
     }
 
-    public void printSubjects(List<Subject> subjects){
+    public void printSubjectsOfStudent(Student student){
+        Set<Subject> subjects = student.getSubjects();
         int i = 0;
-        for (Subject subject : subjects) {
+        for(Subject subject : subjects){
             System.out.println(++i + ": " + subject);
-        }
-    }
-
-    public void printOptionalSubjects(List<OptionalSubject> optionalSubjects){
-        int i = 0;
-        for (OptionalSubject optionalSubject : optionalSubjects) {
-            System.out.println(++i + ": " + optionalSubject);
-        }
-    }
-
-    public void printProfessors(List<Professor> professors){
-        int i = 0;
-        for (Professor professor : professors) {
-            System.out.println(++i + ": " + professor);
-        }
-    }
-
-    public void printSeries(List<Series> series){
-        int i = 0;
-        for (Series objSeries : series) {
-            System.out.println(++i + ": " + objSeries);
-        }
-    }
-
-    public void printGroups(List<Group> groups){
-        int i = 0;
-        for (Group group : groups) {
-            System.out.println(++i + ": " + group);
         }
     }
 

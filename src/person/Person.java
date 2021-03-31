@@ -1,31 +1,32 @@
 package person;
 
+import person.student.Student;
 import subject.OptionalSubject;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-public abstract class Person {
-    String first_name;
-    String last_name;
+public abstract class Person implements Comparable<Person>{
+    String firstName;
+    String lastName;
     String sex;
-    String birth_date;
-    String phone_number;
+    String birthDate;
+    String phoneNumber;
     String email;
-    String join_date;
+    String joinDate;
 
     public Person() {
     }
 
-    public Person(String first_name, String last_name, String sex, String birth_date, String phone_number, String email, String join_date) {
-        this.first_name = first_name;
-        this.last_name = last_name;
+    public Person(String firstName, String lastName, String sex, String birthDate, String phoneNumber, String email, String joinDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.sex = sex;
-        this.birth_date = birth_date;
-        this.phone_number = phone_number;
+        this.birthDate = birthDate;
+        this.phoneNumber = phoneNumber;
         this.email = email;
-        this.join_date = join_date;
+        this.joinDate = joinDate;
     }
 
     public void setPerson(){
@@ -33,41 +34,41 @@ public abstract class Person {
 
         System.out.println("\n--- Set person ---\n");
         System.out.println("Enter first name: ");
-        this.first_name = myInput.nextLine();
+        this.firstName = myInput.nextLine();
 
         System.out.println("Enter last name: ");
-        this.last_name = myInput.nextLine();
+        this.lastName = myInput.nextLine();
 
         System.out.println("Enter sex: ");
         this.sex = myInput.nextLine();
 
         System.out.println("Enter birth date: ");
-        this.birth_date = myInput.nextLine();
+        this.birthDate = myInput.nextLine();
 
         System.out.println("Enter phone number: ");
-        this.phone_number = myInput.nextLine();
+        this.phoneNumber = myInput.nextLine();
 
         System.out.println("Enter email: ");
         this.email = myInput.nextLine();
 
         System.out.println("Enter join date: ");
-        this.join_date = myInput.nextLine();
+        this.joinDate = myInput.nextLine();
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getSex() {
@@ -78,20 +79,20 @@ public abstract class Person {
         this.sex = sex;
     }
 
-    public String getBirth_date() {
-        return birth_date;
+    public String getBirthDate() {
+        return birthDate;
     }
 
-    public void setBirth_date(String birth_date) {
-        this.birth_date = birth_date;
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getEmail() {
@@ -102,29 +103,29 @@ public abstract class Person {
         this.email = email;
     }
 
-    public String getJoin_date() {
-        return join_date;
+    public String getJoinDate() {
+        return joinDate;
     }
 
-    public void setJoin_date(String join_date) {
-        this.join_date = join_date;
+    public void setJoinDate(String joinDate) {
+        this.joinDate = joinDate;
     }
 
     public void printAdvancedInfo(){
         System.out.println("Person{" +
-                "first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", sex='" + sex + '\'' +
-                ", birth_date='" + birth_date + '\'' +
-                ", phone_number='" + phone_number + '\'' +
+                ", birthDate='" + birthDate + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
-                ", join_date='" + join_date + '\'' +
+                ", joinDate='" + joinDate + '\'' +
                 '}');
     }
 
     @Override
     public String toString() {
-        return first_name + ' ' + last_name;
+        return firstName + ' ' + lastName;
     }
 
     @Override
@@ -132,11 +133,20 @@ public abstract class Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        return first_name.equals(person.first_name) && last_name.equals(person.last_name) && sex.equals(person.sex) && birth_date.equals(person.birth_date) && join_date.equals(person.join_date);
+        return firstName.equals(person.firstName) && lastName.equals(person.lastName) && sex.equals(person.sex) && birthDate.equals(person.birthDate) && joinDate.equals(person.joinDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(first_name, last_name, sex, birth_date, join_date);
+        return Objects.hash(firstName, lastName, sex, birthDate, joinDate);
+    }
+
+    @Override
+    public int compareTo(Person o) {
+        if (this.getFirstName().equals(o.getFirstName())) {
+            return this.getLastName().compareTo(o.getLastName());
+        } else {
+            return this.getFirstName().compareTo(o.getFirstName());
+        }
     }
 }

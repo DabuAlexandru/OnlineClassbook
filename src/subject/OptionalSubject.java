@@ -64,4 +64,11 @@ public class OptionalSubject extends Subject {
     public int hashCode() {
         return Objects.hash(super.hashCode(), graded, slots_available);
     }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                "\n*** graded=" + graded +
+                ", slots_available=" + slots_available;
+    }
 }

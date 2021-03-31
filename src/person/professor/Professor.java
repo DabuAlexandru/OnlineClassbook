@@ -27,6 +27,7 @@ public class Professor extends Person{
     }
 
     public void setProfessor() {
+        super.setPerson();
         Scanner myInput = new Scanner(System.in);
 
         System.out.println("Enter rank: ");
