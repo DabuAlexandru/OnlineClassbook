@@ -9,8 +9,8 @@ import static java.lang.Math.*;
 
 public class Subject {
 
-    public static class StudyClass {
-        Professor professor;
+    public static class StudyClass { // can be a course, seminar, laboratory
+        Professor professor; // for every study class there is a single professor
         float weight; // percentage of the final grade
         float grade; // the grade of the student
         float passingGrade; // the minimum grade for the class
@@ -27,7 +27,7 @@ public class Subject {
             this.passingGrade = passingGrade;
         }
 
-        public void setStudyClass()
+        public void setStudyClass() // read data for creating a new object
         {
             Scanner myInput = new Scanner(System.in);
 
@@ -37,11 +37,11 @@ public class Subject {
             System.out.print("Enter passingGrade: ");
             this.passingGrade = myInput.nextFloat();
         }
-
+        // if the study class has a valid configuration and the grade is greater than the passing grade then return true
         public Boolean hasPassed() {
-            return (!this.isValid()) || (grade > passingGrade);
+            return (!this.isValid()) || (grade >= passingGrade);
         }
-
+        // if the passing grade is -1, then the configuration for the study class is invalid and should be ignored
         public Boolean isValid() {
             return (this.passingGrade != -1);
         }
@@ -157,7 +157,7 @@ public class Subject {
         this.credits = credits;
     }
 
-    public Boolean hasPassed() {
+    public Boolean hasPassed() { // check the passing condition for the subclass objects and itself
         return course.hasPassed() && seminar.hasPassed() && laboratory.hasPassed() && (grade >= passingGrade);
     }
 
@@ -236,18 +236,18 @@ public class Subject {
         return grade;
     }
 
-    public void readGrades(){
+    public void readGrades(){ // read grades for every study class that is valid
         Scanner myInput = new Scanner(System.in);
-        System.out.print("Enter course grade: ");
-        this.course.grade = min(max(myInput.nextFloat(), 0), 10);
+        System.out.print("Enter course grade (0-10): ");
+        this.course.grade = min(max(myInput.nextFloat(), 0), 10); // check if the grade is in the correct range
 
-        if(seminar.passingGrade >= 0) {
-            System.out.print("Enter seminar grade: ");
+        if(seminar.isValid()) {
+            System.out.print("Enter seminar grade (0-10): ");
             this.seminar.grade = min(max(myInput.nextFloat(), 0), 10);
         }
 
-        if(laboratory.passingGrade >= 0) {
-            System.out.print("Enter laboratory grade: ");
+        if(laboratory.isValid()) {
+            System.out.print("Enter laboratory grade (0-10): ");
             this.laboratory.grade = min(max(myInput.nextFloat(), 0), 10);
         }
     }

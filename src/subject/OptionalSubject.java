@@ -3,9 +3,13 @@ package subject;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class OptionalSubject extends Subject {
-    boolean graded = true;
-    int slots_available;
+/*
+It could represent another type of subject and could do the same things as the normal subjects.
+ */
+
+public class OptionalSubject extends Subject { // this class should be the representative of optional and facultative
+    boolean graded = true; // if it's graded or not (if it matters for the final GPA)
+    int slots_available; // maximum number of slots
 
     public OptionalSubject() {
     }
