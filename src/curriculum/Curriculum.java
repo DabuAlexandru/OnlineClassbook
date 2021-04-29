@@ -15,7 +15,10 @@ public class Curriculum {
     Set<Subject> obligatory;
     Set<OptionalSubject> optional;
 
-    public Curriculum() {}
+    public Curriculum() {
+        obligatory = new HashSet<>();
+        optional = new HashSet<>();
+    }
 
     public Curriculum(String major, int year, int semester, int req_credit) {
         this.major = major;
@@ -42,6 +45,28 @@ public class Curriculum {
 
     public Set<Subject> getObligatory(){
         return this.obligatory;
+    }
+
+    public Set<OptionalSubject> getOptional() { return this.optional; }
+
+    public int getNumOfObligatory() { return this.obligatory.size(); }
+
+    public int getNumOfOptional() { return this.optional.size(); }
+
+    public void addObligatory(Subject subject) {
+        obligatory.add(subject);
+    }
+
+    public void addOptional(OptionalSubject optionalSubject) {
+        optional.add(optionalSubject);
+    }
+
+    public void removeObligatory(Subject subject){
+        obligatory.remove(subject);
+    }
+
+    public void removeOptional(OptionalSubject optionalSubject) {
+        optional.remove(optionalSubject);
     }
 
     public void appendCurriculum(Student student){

@@ -343,6 +343,33 @@ public class Faculty { // singleton
         }
     }
 
+    public void printObligatorySubjectsOfCurriculum(Curriculum curriculum) {
+        int i = 0;
+        Set<Subject> subjects = curriculum.getObligatory();
+        for (Subject subject : subjects) {
+            System.out.println(++i + ": " + subject);
+        }
+    }
+
+    public void printOptionalSubjectsOfCurriculum(Curriculum curriculum) {
+        int i = 0;
+        Set<OptionalSubject> optionalSubjects = curriculum.getOptional();
+        for (OptionalSubject optionalSubject : optionalSubjects) {
+            System.out.println(++i + ": " + optionalSubject);
+        }
+    }
+
+    public void printAllSubjectsOfCurriculum(Curriculum curriculum){
+        if(curriculum.getNumOfObligatory() > 0) {
+            System.out.println("---- Obligatory ----");
+            printObligatorySubjectsOfCurriculum(curriculum);
+        }
+        if(curriculum.getNumOfOptional() > 0) {
+            System.out.println("---- Optional ----");
+            printOptionalSubjectsOfCurriculum(curriculum);
+        }
+    }
+
     @Override
     public String toString() {
         return "Faculty{" +

@@ -39,9 +39,10 @@ public class Menu {
                             Online Classbook:
                             1. Add a new item in the database
                             2. Add some information for an existing item
-                            3. Show specific information of an item
-                            4. Remove an item from the database
-                            5. Show all elements of a category
+                            3. Remove some information from an existing item
+                            4. Show specific information of an item
+                            5. Remove an item from the database
+                            6. Show all elements of a category
                             0. Exit
                             """
             );
@@ -53,11 +54,13 @@ public class Menu {
                 addElementsMenu();
             } else if (option == 2) { // Add some information for an existing item
                 addInformationMenu();
-            } else if (option == 3) { // Show specific information of an item
+            } else if (option == 3) { // Remove some information from an existing item
+                addInformationMenu();
+            } else if (option == 4) { // Show specific information of an item
                 showSpecificInformationMenu();
-            } else if (option == 4) { // Remove an item from the database
+            } else if (option == 5) { // Remove an item from the database
                 removeElementsMenu();
-            } else if (option == 5) { // Show all elements of a category
+            } else if (option == 6) { // Show all elements of a category
                 showElementsMenu();
             }
             printSpaces(8);
@@ -208,7 +211,7 @@ public class Menu {
                 faculty.addGroup();
             } else if (option == 6) { // Add a new series
                 faculty.addSeries();
-            } else if (option == 7) {
+            } else if (option == 7) { // Add a new curriculum
                 faculty.addCurriculum();
             }
             printSpaces(3);
@@ -224,6 +227,9 @@ public class Menu {
                             2. Set a professor to a study class of a subject
                             3. Set a group to a student
                             4. Set a series to a group
+                            5. Add a subject to a curriculum
+                            6. Add an optional subject to a curriculum
+                            7. Set a curriculum to a student
                             0. back to the start menu
                             """
             );
@@ -272,9 +278,37 @@ public class Menu {
                         series.addGroup(group);
                     }
                 }
+            } else if (option == 5) { // Add a subject to a curriculum
+                Subject subject = chooseSubject();
+                if(subject != null) {
+                    Curriculum curriculum = chooseCurriculum();
+                    if(curriculum != null) {
+                        curriculum.addObligatory(subject);
+                    }
+                }
+            } else if (option == 6) { // Add an optional subject to a curriculum
+                OptionalSubject optionalSubject = chooseOptionalSubject();
+                if(optionalSubject != null) {
+                    Curriculum curriculum = chooseCurriculum();
+                    if(curriculum != null) {
+                        curriculum.addOptional(optionalSubject);
+                    }
+                }
+            } else if (option == 7) { // Set a curriculum to a student
+                Curriculum curriculum = chooseCurriculum();
+                if(curriculum != null) {
+                    Student student = chooseStudent();
+                    if(student != null) {
+                        curriculum.appendCurriculum(student);
+                    }
+                }
             }
             printSpaces(3);
         }
+    }
+
+    public void removeInformationMenu(){
+
     }
 
     public void showSpecificInformationMenu(){
@@ -285,6 +319,7 @@ public class Menu {
                             1. Print all groups of a series in a sorted matter (by name)
                             2. Print all students of a group in a sorted matter (by firstName and lastName)
                             3. Print all subjects of a student
+                            4. Print all subjects of a curriculum
                             0. back to the start menu
                             """
             );
@@ -305,6 +340,11 @@ public class Menu {
                 Student student = chooseStudent();
                 if(student != null) {
                     faculty.printSubjectsOfStudent(student);
+                }
+            } else if (option == 4) { // Print all subjects of a curriculum
+                Curriculum curriculum = chooseCurriculum();
+                if(curriculum != null) {
+                    faculty.printAllSubjectsOfCurriculum(curriculum);
                 }
             }
             printSpaces(3);
