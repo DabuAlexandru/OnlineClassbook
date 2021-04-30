@@ -55,7 +55,7 @@ public class Menu {
             } else if (option == 2) { // Add some information for an existing item
                 addInformationMenu();
             } else if (option == 3) { // Remove some information from an existing item
-                addInformationMenu();
+                removeInformationMenu();
             } else if (option == 4) { // Show specific information of an item
                 showSpecificInformationMenu();
             } else if (option == 5) { // Remove an item from the database
@@ -67,19 +67,26 @@ public class Menu {
         }
     }
 
-    private Curriculum chooseCurriculum(){
-        int n, index;
-        System.out.println("\nChoose a curriculum:");
-        faculty.printCurricula();
-        n = faculty.getNumOfCurricula();
+    private int getValidIndex(int n) {
+        int index;
         if (n == 0) {
-            System.out.println("No curriculum available");
-            return null;
+            System.out.println("No items available");
+            return -1;
         }
         do {
             System.out.print("index: ");
             index = myInput.nextInt() - 1;
         } while (index < 0 || index > n - 1);
+        return index;
+    }
+
+    private Curriculum chooseCurriculum(){
+        int n, index;
+        System.out.println("\nChoose a curriculum:");
+        faculty.printCurricula();
+        n = faculty.getNumOfCurricula();
+        index = getValidIndex(n);
+        if(index == -1) { return null; }
         return faculty.getCurriculum(index);
     }
 
@@ -88,15 +95,19 @@ public class Menu {
         System.out.println("\nChoose a student:");
         faculty.printStudents();
         n = faculty.getNumOfStudents();
-        if (n == 0) {
-            System.out.println("No students available");
-            return null;
-        }
-        do {
-            System.out.print("index: ");
-            index = myInput.nextInt() - 1;
-        } while (index < 0 || index > n - 1);
+        index = getValidIndex(n);
+        if(index == -1) { return null; }
         return faculty.getStudent(index);
+    }
+
+    private Student chooseStudent(Group group) {
+        int n, index;
+        System.out.println("\nChoose a student:");
+        faculty.printStudentsOfGroup(group);
+        n = group.getNumOfStudents();
+        index = getValidIndex(n);
+        if(index == -1) { return null; }
+        return faculty.getStudentOfGroup(group, index);
     }
 
     private Subject chooseSubject(){
@@ -104,16 +115,29 @@ public class Menu {
         System.out.println("Choose a subject:");
         faculty.printSubjects();
         n = faculty.getNumOfSubjects();
-        if (n == 0) {
-            System.out.println("No subjects available");
-            return null;
-        }
-        do {
-            System.out.print("index: ");
-            index = myInput.nextInt() - 1;
-        } while (index < 0 || index > n - 1);
-
+        index = getValidIndex(n);
+        if(index == -1) { return null; }
         return faculty.getSubject(index);
+    }
+
+    private Subject chooseSubject(Student student){
+        int n, index;
+        System.out.println("Choose a subject:");
+        faculty.printSubjectsOfStudent(student);
+        n = student.getNumOfSubjects();
+        index = getValidIndex(n);
+        if(index == -1) { return null; }
+        return faculty.getSubjectOfStudent(student, index);
+    }
+
+    private Subject chooseSubject(Curriculum curriculum){
+        int n, index;
+        System.out.println("Choose a subject:");
+        faculty.printObligatorySubjectsOfCurriculum(curriculum);
+        n = curriculum.getNumOfObligatory();
+        index = getValidIndex(n);
+        if(index == -1) { return null; }
+        return faculty.getObligatoryOfCurriculum(curriculum, index);
     }
 
     private OptionalSubject chooseOptionalSubject(){
@@ -121,16 +145,19 @@ public class Menu {
         System.out.println("Choose an optional subject:");
         faculty.printOptionalSubjects();
         n = faculty.getNumOfOptionalSubjects();
-        if (n == 0) {
-            System.out.println("No optional subjects available");
-            return null;
-        }
-        do {
-            System.out.print("index: ");
-            index = myInput.nextInt() - 1;
-        } while (index < 0 || index > n - 1);
-
+        index = getValidIndex(n);
+        if(index == -1) { return null; }
         return faculty.getOptionalSubject(index);
+    }
+
+    private OptionalSubject chooseOptionalSubject(Curriculum curriculum){
+        int n, index;
+        System.out.println("Choose an optional subject:");
+        faculty.printOptionalSubjectsOfCurriculum(curriculum);
+        n = curriculum.getNumOfOptional();
+        index = getValidIndex(n);
+        if(index == -1) { return null; }
+        return faculty.getOptionalOfCurriculum(curriculum, index);
     }
 
     private Professor chooseProfessor(){
@@ -138,14 +165,8 @@ public class Menu {
         System.out.println("Choose a professor:");
         faculty.printProfessors();
         n = faculty.getNumOfSubjects();
-        if (n == 0) {
-            System.out.println("No professors available");
-            return null;
-        }
-        do {
-            System.out.print("index: ");
-            index = myInput.nextInt() - 1;
-        } while (index < 0 || index > n - 1);
+        index = getValidIndex(n);
+        if(index == -1) { return null; }
         return faculty.getProfessor(index);
     }
 
@@ -154,15 +175,19 @@ public class Menu {
         System.out.println("Choose a group:");
         faculty.printGroups();
         n = faculty.getNumOfGroups();
-        if (n == 0) {
-            System.out.println("No groups available");
-            return null;
-        }
-        do {
-            System.out.print("index: ");
-            index = myInput.nextInt() - 1;
-        } while (index < 0 || index > n - 1);
+        index = getValidIndex(n);
+        if(index == -1) { return null; }
         return faculty.getGroup(index);
+    }
+
+    private Group chooseGroup(Series series){
+        int n, index;
+        System.out.println("Choose a group:");
+        faculty.printGroupsOfSeries(series);
+        n = series.getNumOfGroups();
+        index = getValidIndex(n);
+        if(index == -1) { return null; }
+        return faculty.getGroupOfSeries(series, index);
     }
 
     private Series chooseSeries(){
@@ -170,14 +195,8 @@ public class Menu {
         System.out.println("Choose a series:");
         faculty.printSeries();
         n = faculty.getNumOfSeries();
-        if (n == 0) {
-            System.out.println("No series available");
-            return null;
-        }
-        do {
-            System.out.print("index: ");
-            index = myInput.nextInt() - 1;
-        } while (index < 0 || index > n - 1);
+        index = getValidIndex(n);
+        if(index == -1) { return null; }
         return faculty.getSeries(index);
     }
 
@@ -255,7 +274,7 @@ public class Menu {
                             subject.getCourse().setProfessor(professor);
                         } else if (subject.getSeminar().isValid() && "seminar".contains(choice.toLowerCase())) {
                             subject.getSeminar().setProfessor(professor);
-                        } else if (subject.getLaboratory().isValid() && "seminar".contains(choice.toLowerCase())) {
+                        } else if (subject.getLaboratory().isValid() && "laboratory".contains(choice.toLowerCase())) {
                             subject.getLaboratory().setProfessor(professor);
                         } else {
                             System.out.println("Invalid input!!!");
@@ -308,7 +327,89 @@ public class Menu {
     }
 
     public void removeInformationMenu(){
-
+        while (true) {
+            System.out.println(
+                    """
+                            Add some information for an existing item
+                            1. Remove a subject from a student
+                            2. Remove a professor from a study class of a subject
+                            3. Remove a student from a group
+                            4. Remove a group from a series
+                            5. Remove a subject from a curriculum
+                            6. Remove an optional subject from a curriculum
+                            0. back to the start menu
+                            """
+            );
+            option = myInput.nextInt();
+            if (option == 0) {
+                break;
+            } else if (option == 1) { // Remove a subject from a student
+                Student student = chooseStudent();
+                if(student != null) {
+                    Subject subject = chooseSubject(student);
+                    if(subject != null) {
+                        student.removeSubject(subject);
+                    }
+                }
+            } else if (option == 2) { // Remove a professor from a study class of a subject
+                Subject subject = chooseSubject();
+                if(subject != null) {
+                    System.out.println("Choose one (course/seminar/laboratory):");
+                    String choice = myInput.next();
+                    if ("course".contains(choice.toLowerCase())) {
+                        subject.getCourse().setProfessor(null);
+                    } else if (subject.getSeminar().isValid() && "seminar".contains(choice.toLowerCase())) {
+                        subject.getSeminar().setProfessor(null);
+                    } else if (subject.getLaboratory().isValid() && "laboratory".contains(choice.toLowerCase())) {
+                        subject.getLaboratory().setProfessor(null);
+                    } else {
+                        System.out.println("Invalid input!!!");
+                    }
+                }
+            } else if (option == 3) { // Remove a student from a group
+                Group group = chooseGroup();
+                if(group != null) {
+                    Student student = chooseStudent(group);
+                    if(student != null) {
+                        group.removeStudent(student);
+                    }
+                }
+            } else if (option == 4) { // Remove a group from a series
+                Series series = chooseSeries();
+                if(series != null) {
+                    Group group = chooseGroup(series);
+                    if(group != null) {
+                        series.removeGroup(group);
+                    }
+                }
+            } else if (option == 5) { // Remove a subject from a curriculum
+                Curriculum curriculum = chooseCurriculum();
+                if(curriculum != null) {
+                    Subject subject = chooseSubject(curriculum);
+                    if(subject != null) {
+                        curriculum.removeObligatory(subject);
+                    }
+                }
+            } else if (option == 6) { // Remove an optional subject from a curriculum
+                Curriculum curriculum = chooseCurriculum();
+                if(curriculum != null) {
+                    OptionalSubject optionalSubject = chooseOptionalSubject(curriculum);
+                    if(optionalSubject != null) {
+                        curriculum.removeOptional(optionalSubject);
+                    }
+                }
+            } else if (option == 7) { // Remove a curriculum from a student
+                // ... TO DO
+                Curriculum curriculum = chooseCurriculum();
+                if(curriculum != null) {
+                    Student student = chooseStudent();
+                    if(student != null) {
+                        curriculum.appendCurriculum(student);
+                    }
+                }
+            }
+            printSpaces(3);
+        }
     }
 
     public void showSpecificInformationMenu(){
@@ -382,7 +483,7 @@ public class Menu {
             } else if (option == 3) { // Remove an optional subject
                 OptionalSubject optionalSubject = chooseOptionalSubject();
                 if(optionalSubject != null) {
-                    faculty.removeSubject(optionalSubject);
+                    faculty.removeOptionalSubject(optionalSubject);
                 }
             } else if (option == 4) { // Remove a professor
                 Professor professor = chooseProfessor();

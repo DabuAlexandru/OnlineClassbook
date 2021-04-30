@@ -43,6 +43,10 @@ public class Group implements Comparable<Group>{
         }
     }
 
+    public int getNumOfStudents() {
+        return students.size();
+    }
+
     public Series getSeries() {
         return series;
     }

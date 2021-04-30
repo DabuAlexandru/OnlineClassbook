@@ -175,8 +175,16 @@ public class Faculty { // singleton
         this.subjects.remove(subject);
     }
 
-    public void removeOptionalSubject(int index){ optionalSubjects.remove(index); }
-    public void removeOptionalSubject(OptionalSubject optionalSubject){ optionalSubjects.remove(optionalSubject); }
+    public void removeOptionalSubject(int index){
+        OptionalSubject optionalSubject = getOptionalSubject(index);
+        removeOptionalSubject(optionalSubject);
+    }
+    public void removeOptionalSubject(OptionalSubject optionalSubject){
+        for(Curriculum curriculum : this.curricula) {
+            curriculum.getOptional().remove(optionalSubject);
+        }
+        this.optionalSubjects.remove(optionalSubject);
+    }
 
     public void removeProfessor(int index){
         Professor professor = getProfessor(index);
@@ -368,6 +376,33 @@ public class Faculty { // singleton
             System.out.println("---- Optional ----");
             printOptionalSubjectsOfCurriculum(curriculum);
         }
+    }
+
+    // get specific items
+
+    public Subject getSubjectOfStudent(Student student, int index) {
+        List<Subject> subjects = new ArrayList<>(student.getSubjects());
+        return subjects.get(index);
+    }
+
+    public Student getStudentOfGroup(Group group, int index) {
+        List<Student> students = new ArrayList<>(group.getStudents());
+        return students.get(index);
+    }
+
+    public Group getGroupOfSeries(Series series, int index) {
+        List<Group> groups = new ArrayList<>(series.getGroups());
+        return groups.get(index);
+    }
+
+    public Subject getObligatoryOfCurriculum(Curriculum curriculum, int index) {
+        List<Subject> subjects = new ArrayList<>(curriculum.getObligatory());
+        return subjects.get(index);
+    }
+
+    public OptionalSubject getOptionalOfCurriculum(Curriculum curriculum, int index) {
+        List<OptionalSubject> optionalSubjects = new ArrayList<>(curriculum.getOptional());
+        return optionalSubjects.get(index);
     }
 
     @Override

@@ -46,6 +46,8 @@ public class Student extends Person {
 
     }
 
+    public int getNumOfSubjects() { return subjects.size(); }
+
     public Group getGroup() {
         return group;
     }

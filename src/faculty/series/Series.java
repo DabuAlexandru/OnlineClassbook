@@ -41,6 +41,10 @@ public class Series {
         }
     }
 
+    public int getNumOfGroups() {
+        return groups.size();
+    }
+
     public String getName() {
         return name;
     }
