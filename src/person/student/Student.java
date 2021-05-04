@@ -27,13 +27,6 @@ public class Student extends Person {
         this.subjects = subjects;
     }
 
-    public Student(String first_name, String last_name, String birth_date, String join_date, String email,
-                   int year, int semester, Set<Subject> subjects) {
-        this.year = year;
-        this.semester = semester;
-        this.subjects = subjects;
-    }
-
     public void setStudent() {
         super.setPerson();
         Scanner myInput = new Scanner(System.in);

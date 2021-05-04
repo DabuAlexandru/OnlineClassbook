@@ -79,7 +79,7 @@ public class Curriculum {
         {
             student.addSubjects(obligatory);
             for(OptionalSubject optSubj : optional) {
-                student.addSubject(new Subject(optSubj));
+                student.addSubject(optSubj);
             }
         }
         else
