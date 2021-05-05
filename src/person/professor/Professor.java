@@ -14,14 +14,14 @@ public class Professor extends Person{
     public Professor() {
     }
 
-    public Professor(String first_name, String last_name, String sex, String birth_date, String phone_number, String email, String join_date, AcademicRank rank, int salary) {
+    public Professor(String first_name, String last_name, String sex, String birth_date, String phone_number,
+                     String email, String join_date, String rank, int salary) {
         super(first_name, last_name, sex, birth_date, phone_number, email, join_date);
-        this.rank = rank;
+        setRank(rank);
         this.salary = salary;
     }
 
-    public Professor(String first_name, String last_name, String birth_date, String join_date, String email, AcademicRank rank, int salary) {
-
+    public Professor(AcademicRank rank, int salary) {
         this.rank = rank;
         this.salary = salary;
     }
@@ -32,7 +32,14 @@ public class Professor extends Person{
 
         System.out.println("Enter rank: ");
         String aux = myInput.nextLine();
-        switch (aux) {
+        setRank(aux);
+
+        System.out.println("Enter salary: ");
+        this.salary = myInput.nextInt();
+    }
+
+    public void setRank(String rank) {
+        switch (rank) {
             case "Professor" -> this.rank = AcademicRank.Professor;
             case "Reader" -> this.rank = AcademicRank.Reader;
             case "Lecturer" -> this.rank = AcademicRank.Lecturer;
@@ -42,13 +49,15 @@ public class Professor extends Person{
                 this.rank = AcademicRank.Assistant;
             }
         }
-
-        System.out.println("Enter salary: ");
-        this.salary = myInput.nextInt();
     }
 
-    public AcademicRank getRank() {
-        return rank;
+    public String getRank() {
+        return switch (this.rank) {
+            case Professor -> "Professor";
+            case Reader -> "Reader";
+            case Lecturer -> "Lecturer";
+            case Assistant -> "Assistant";
+        };
     }
 
     public void setRank(AcademicRank rank) {

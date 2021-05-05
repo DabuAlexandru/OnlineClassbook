@@ -9,19 +9,29 @@ import person.student.Student;
 import subject.OptionalSubject;
 import subject.Subject;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Menu {
 
     Faculty faculty;
+    ReaderWriter readerWriter;
     Scanner myInput;
     int option;
 
-    public Menu(){
+    public Menu() throws IOException {
         faculty = Faculty.getFaculty("FMI");
+        readerWriter = ReaderWriter.getReaderWriter();
         faculty.addSpecialization("Mathematics", 100, 50, 1000);
         faculty.addSpecialization("Informatics", 200, 50, 1500);
         myInput = new Scanner(System.in);
+        faculty.setStudents(readerWriter.readFromCSV("student", "src/database/Student.CSV"));
+        faculty.setProfessors(readerWriter.readFromCSV("professor", "src/database/Professor.CSV"));
+        faculty.setSubjects(readerWriter.readFromCSV("subject", "src/database/Subject.CSV"));
+        faculty.setOptionalSubjects(readerWriter.readFromCSV("optional subject", "src/database/OptionalSubject.CSV"));
+        faculty.setGroups(readerWriter.readFromCSV("group", "src/database/Group.CSV"));
+        faculty.setSeries(readerWriter.readFromCSV("series", "src/database/Series.CSV"));
+        faculty.setCurricula(readerWriter.readFromCSV("curriculum", "src/database/Curriculum.CSV"));
         option = 0;
     }
 
@@ -31,7 +41,7 @@ public class Menu {
         }
     }
 
-    public void principalMenu(){
+    public void principalMenu() throws IOException {
         int option;
         while (true) {
             System.out.println(
@@ -200,7 +210,7 @@ public class Menu {
         return faculty.getSeries(index);
     }
 
-    public void addElementsMenu(){
+    public void addElementsMenu() throws IOException {
         while (true) {
             System.out.println(
                     """
@@ -219,19 +229,26 @@ public class Menu {
             if (option == 0) { // back to the start menu
                 break;
             } else if (option == 1) { // Add a new student
-                faculty.addStudent();
+                Student student = faculty.addStudent();
+                readerWriter.writeToCSV(student, "src/database/Student.CSV", true);
             } else if (option == 2) { // Add a new subject
-                faculty.addSubject();
+                Subject subject = faculty.addSubject();
+                readerWriter.writeToCSV(subject, "src/database/Subject.CSV", true);
             } else if (option == 3) { // Add a new optional subject
-                faculty.addOptionalSubject();
+                OptionalSubject optionalSubject = faculty.addOptionalSubject();
+                readerWriter.writeToCSV(optionalSubject, "src/database/OptionalSubject.CSV", true);
             } else if (option == 4) { // Add a new professor
-                faculty.addProfessor();
+                Professor professor = faculty.addProfessor();
+                readerWriter.writeToCSV(professor, "src/database/Professor.CSV", true);
             } else if (option == 5) { // Add a new group
-                faculty.addGroup();
+                Group group = faculty.addGroup();
+                readerWriter.writeToCSV(group, "src/database/Group.CSV", true);
             } else if (option == 6) { // Add a new series
-                faculty.addSeries();
+                Series series = faculty.addSeries();
+                readerWriter.writeToCSV(series, "src/database/Series.CSV", true);
             } else if (option == 7) { // Add a new curriculum
-                faculty.addCurriculum();
+                Curriculum curriculum = faculty.addCurriculum();
+                readerWriter.writeToCSV(curriculum, "src/database/Curriculum.CSV", true);
             }
             printSpaces(3);
         }

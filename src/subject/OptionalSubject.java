@@ -8,14 +8,23 @@ It could represent another type of subject and could do the same things as the n
  */
 
 public class OptionalSubject extends Subject { // this class should be the representative of optional and facultative
-    boolean graded = true; // if it's graded or not (if it matters for the final GPA)
+    boolean graded; // if it's graded or not (if it matters for the final GPA)
     int slots_available; // maximum number of slots
 
     public OptionalSubject() {
+        this.graded = false;
+        this.slots_available = 10;
     }
 
-    public OptionalSubject(String name, StudyClass course, StudyClass seminar, StudyClass laboratory, int grade, float passing_grade, int credits, boolean graded, int slots_available) {
+    public OptionalSubject(String name, StudyClass course, StudyClass seminar, StudyClass laboratory, int grade,
+                           float passing_grade, int credits, boolean graded, int slots_available) {
         super(name, course, seminar, laboratory, grade, passing_grade, credits);
+        this.graded = graded;
+        this.slots_available = slots_available;
+    }
+
+    public OptionalSubject(String name, float passing_grade, int credits, boolean graded, int slots_available) {
+        super(name, passing_grade, credits);
         this.graded = graded;
         this.slots_available = slots_available;
     }

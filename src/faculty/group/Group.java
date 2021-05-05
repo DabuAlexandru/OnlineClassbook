@@ -21,6 +21,10 @@ public class Group implements Comparable<Group>{
         this.students = students;
     }
 
+    public Group(String name) {
+        this.name = name;
+    }
+
     public void setGroup() {
         Scanner myInput = new Scanner(System.in);
         System.out.println("Group:");

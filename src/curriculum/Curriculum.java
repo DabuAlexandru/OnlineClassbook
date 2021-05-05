@@ -16,6 +16,10 @@ public class Curriculum {
     Set<OptionalSubject> optional;
 
     public Curriculum() {
+        major = "";
+        year = 1;
+        semester = 1;
+        req_credit = 0;
         obligatory = new HashSet<>();
         optional = new HashSet<>();
     }
@@ -25,8 +29,6 @@ public class Curriculum {
         this.year = year;
         this.semester = semester;
         this.req_credit = req_credit;
-        obligatory = new HashSet<>();
-        optional = new HashSet<>();
     }
 
     public void setCurriculum(){
@@ -41,6 +43,38 @@ public class Curriculum {
         System.out.print("required credits = ");
         this.req_credit = myInput.nextInt();
         System.out.println();
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getSemester() {
+        return semester;
+    }
+
+    public void setSemester(int semester) {
+        this.semester = semester;
+    }
+
+    public int getReq_credit() {
+        return req_credit;
+    }
+
+    public void setReq_credit(int req_credit) {
+        this.req_credit = req_credit;
     }
 
     public Set<Subject> getObligatory(){

@@ -109,6 +109,34 @@ public class Faculty { // singleton
     List<Group> groups = new ArrayList<>();
     List<Series> series = new ArrayList<>();
 
+    public void setCurricula(List<Curriculum> curricula) {
+        this.curricula = curricula;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
+    public void setSubjects(List<Subject> subjects) {
+        this.subjects = subjects;
+    }
+
+    public void setOptionalSubjects(List<OptionalSubject> optionalSubjects) {
+        this.optionalSubjects = optionalSubjects;
+    }
+
+    public void setProfessors(List<Professor> professors) {
+        this.professors = professors;
+    }
+
+    public void setGroups(List<Group> groups) {
+        this.groups = groups;
+    }
+
+    public void setSeries(List<Series> series) {
+        this.series = series;
+    }
+
     private static Faculty faculty;
 
     private Faculty(String name) {
@@ -232,46 +260,53 @@ public class Faculty { // singleton
     }
 
     // add elements
-    public void addCurriculum() {
+    public Curriculum addCurriculum() {
         Curriculum newCurriculum = new Curriculum();
         newCurriculum.setCurriculum();
         curricula.add(newCurriculum);
+        return newCurriculum;
     }
 
-    public void addStudent(){
+    public Student addStudent(){
         Student newStudent = new Student();
         newStudent.setStudent();
         students.add(newStudent);
+        return newStudent;
     }
 
-    public void addSubject(){
+    public Subject addSubject(){
         Subject newSubject = new Subject();
         newSubject.setSubject();
         subjects.add(newSubject);
+        return newSubject;
     }
 
-    public void addOptionalSubject(){
+    public OptionalSubject addOptionalSubject(){
         OptionalSubject newOptionalSubject = new OptionalSubject();
         newOptionalSubject.setOptionalSubject();
         optionalSubjects.add(newOptionalSubject);
+        return newOptionalSubject;
     }
 
-    public void addProfessor(){
+    public Professor addProfessor(){
         Professor newProfessor = new Professor();
         newProfessor.setProfessor();
         professors.add(newProfessor);
+        return newProfessor;
     }
 
-    public void addGroup(){
+    public Group addGroup(){
         Group newGroup = new Group();
         newGroup.setGroup();
         groups.add(newGroup);
+        return newGroup;
     }
 
-    public void addSeries() {
+    public Series addSeries() {
         Series newSeries = new Series();
         newSeries.setSeries();
         series.add(newSeries);
+        return newSeries;
     }
 
     // print elements
