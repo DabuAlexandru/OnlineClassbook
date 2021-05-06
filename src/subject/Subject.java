@@ -136,17 +136,6 @@ public class Subject {
         this.credits = 1;
     }
 
-//    public Subject(OptionalSubject optSubject) {
-//        this.name = optSubject.name;
-//        this.course = optSubject.course;
-//        this.seminar = optSubject.seminar;
-//        this.laboratory = optSubject.laboratory;
-//
-//        this.grade = optSubject.grade;
-//        this.passingGrade = optSubject.passingGrade;
-//        this.credits = optSubject.getCredits();
-//    }
-
     public Subject(String name, StudyClass course, StudyClass seminar, StudyClass laboratory, int grade, float passingGrade, int credits) {
         this.name = name;
         this.course = course;
@@ -159,6 +148,10 @@ public class Subject {
 
     public Subject(String name, float passingGrade, int credits) {
         this.name = name;
+        this.course = new StudyClass();
+        this.seminar = new StudyClass();
+        this.laboratory = new StudyClass();
+        this.grade = 1;
         this.passingGrade = passingGrade;
         this.credits = credits;
     }

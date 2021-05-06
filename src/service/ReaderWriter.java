@@ -211,6 +211,10 @@ public class ReaderWriter { // singleton
         writeToAudit(actionToAudit, "src/database/Audit.CSV");
     }
 
+    public void writeToAudit(String action) throws IOException {
+        writeToAudit(action, "src/database/Audit.CSV");
+    }
+
     public void writeToAudit(String action, String path) throws IOException {
         File file = new File(path);
         BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));

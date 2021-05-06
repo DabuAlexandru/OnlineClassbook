@@ -16,12 +16,12 @@ public class Curriculum {
     Set<OptionalSubject> optional;
 
     public Curriculum() {
-        major = "";
-        year = 1;
-        semester = 1;
-        req_credit = 0;
-        obligatory = new HashSet<>();
-        optional = new HashSet<>();
+        this.major = "";
+        this.year = 1;
+        this.semester = 1;
+        this.req_credit = 0;
+        this.obligatory = new HashSet<>();
+        this.optional = new HashSet<>();
     }
 
     public Curriculum(String major, int year, int semester, int req_credit) {
@@ -29,6 +29,8 @@ public class Curriculum {
         this.year = year;
         this.semester = semester;
         this.req_credit = req_credit;
+        this.obligatory = new HashSet<>();
+        this.optional = new HashSet<>();
     }
 
     public void setCurriculum(){

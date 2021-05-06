@@ -12,17 +12,18 @@ public class Group implements Comparable<Group>{
     TreeSet<Student> students;
 
     public Group() {
-        name = "";
-        students = new TreeSet<>();
+        this.name = "";
+        this.students = new TreeSet<>();
+    }
+
+    public Group(String name) {
+        this.name = name;
+        this.students = new TreeSet<>();
     }
 
     public Group(String name, TreeSet<Student> students) {
         this.name = name;
         this.students = students;
-    }
-
-    public Group(String name) {
-        this.name = name;
     }
 
     public void setGroup() {

@@ -230,31 +230,38 @@ public class Menu {
                 break;
             } else if (option == 1) { // Add a new student
                 Student student = faculty.addStudent();
-                readerWriter.writeToCSV(student, "src/database/Student.CSV", true);
+                readerWriter.writeToAudit("Add Student to list");
+                readerWriter.writeToCSV(student, "src/database/Student.CSV", false);
             } else if (option == 2) { // Add a new subject
                 Subject subject = faculty.addSubject();
-                readerWriter.writeToCSV(subject, "src/database/Subject.CSV", true);
+                readerWriter.writeToAudit("Add Subject to list");
+                readerWriter.writeToCSV(subject, "src/database/Subject.CSV", false);
             } else if (option == 3) { // Add a new optional subject
                 OptionalSubject optionalSubject = faculty.addOptionalSubject();
-                readerWriter.writeToCSV(optionalSubject, "src/database/OptionalSubject.CSV", true);
+                readerWriter.writeToAudit("Add OptionalSubject to list");
+                readerWriter.writeToCSV(optionalSubject, "src/database/OptionalSubject.CSV", false);
             } else if (option == 4) { // Add a new professor
                 Professor professor = faculty.addProfessor();
-                readerWriter.writeToCSV(professor, "src/database/Professor.CSV", true);
+                readerWriter.writeToAudit("Add Professor to list");
+                readerWriter.writeToCSV(professor, "src/database/Professor.CSV", false);
             } else if (option == 5) { // Add a new group
                 Group group = faculty.addGroup();
-                readerWriter.writeToCSV(group, "src/database/Group.CSV", true);
+                readerWriter.writeToAudit("Add Group to list");
+                readerWriter.writeToCSV(group, "src/database/Group.CSV", false);
             } else if (option == 6) { // Add a new series
                 Series series = faculty.addSeries();
-                readerWriter.writeToCSV(series, "src/database/Series.CSV", true);
+                readerWriter.writeToAudit("Add Series to list");
+                readerWriter.writeToCSV(series, "src/database/Series.CSV", false);
             } else if (option == 7) { // Add a new curriculum
                 Curriculum curriculum = faculty.addCurriculum();
-                readerWriter.writeToCSV(curriculum, "src/database/Curriculum.CSV", true);
+                readerWriter.writeToAudit("Add Curriculum to list");
+                readerWriter.writeToCSV(curriculum, "src/database/Curriculum.CSV", false);
             }
             printSpaces(3);
         }
     }
 
-    public void addInformationMenu(){
+    public void addInformationMenu() throws IOException {
         while (true) {
             System.out.println(
                     """
@@ -278,6 +285,7 @@ public class Menu {
                     Student student = chooseStudent();
                     if(student != null) {
                         student.addSubject(subject);
+                        readerWriter.writeToAudit("Add Subject to Student");
                     }
                 }
             } else if (option == 2) { // Set a professor to a study class of a subject
@@ -289,10 +297,13 @@ public class Menu {
                         String choice = myInput.next();
                         if ("course".contains(choice.toLowerCase())) {
                             subject.getCourse().setProfessor(professor);
+                            readerWriter.writeToAudit("Set Professor to Course of Subject");
                         } else if (subject.getSeminar().isValid() && "seminar".contains(choice.toLowerCase())) {
                             subject.getSeminar().setProfessor(professor);
+                            readerWriter.writeToAudit("Set Professor to Seminar of Subject");
                         } else if (subject.getLaboratory().isValid() && "laboratory".contains(choice.toLowerCase())) {
                             subject.getLaboratory().setProfessor(professor);
+                            readerWriter.writeToAudit("Set Professor to Laboratory of Subject");
                         } else {
                             System.out.println("Invalid input!!!");
                         }
@@ -304,6 +315,7 @@ public class Menu {
                     Student student = chooseStudent();
                     if(student != null) {
                         group.addStudent(student);
+                        readerWriter.writeToAudit("Add Student to Group");
                     }
                 }
             } else if (option == 4) { // Set a series to a group
@@ -312,6 +324,7 @@ public class Menu {
                     Group group = chooseGroup();
                     if(group != null) {
                         series.addGroup(group);
+                        readerWriter.writeToAudit("Set Series to a Group");
                     }
                 }
             } else if (option == 5) { // Add a subject to a curriculum
@@ -320,6 +333,7 @@ public class Menu {
                     Curriculum curriculum = chooseCurriculum();
                     if(curriculum != null) {
                         curriculum.addObligatory(subject);
+                        readerWriter.writeToAudit("Add Subject to Curriculum");
                     }
                 }
             } else if (option == 6) { // Add an optional subject to a curriculum
@@ -328,6 +342,7 @@ public class Menu {
                     Curriculum curriculum = chooseCurriculum();
                     if(curriculum != null) {
                         curriculum.addOptional(optionalSubject);
+                        readerWriter.writeToAudit("Add OptionalSubject to Curriculum");
                     }
                 }
             } else if (option == 7) { // Set a curriculum to a student
@@ -336,6 +351,7 @@ public class Menu {
                     Student student = chooseStudent();
                     if(student != null) {
                         curriculum.appendCurriculum(student);
+                        readerWriter.writeToAudit("Set curriculum to student");
                     }
                 }
             }
@@ -343,7 +359,7 @@ public class Menu {
         }
     }
 
-    public void removeInformationMenu(){
+    public void removeInformationMenu() throws IOException {
         while (true) {
             System.out.println(
                     """
@@ -366,6 +382,7 @@ public class Menu {
                     Subject subject = chooseSubject(student);
                     if(subject != null) {
                         student.removeSubject(subject);
+                        readerWriter.writeToAudit("Remove Subject from Student");
                     }
                 }
             } else if (option == 2) { // Remove a professor from a study class of a subject
@@ -375,10 +392,13 @@ public class Menu {
                     String choice = myInput.next();
                     if ("course".contains(choice.toLowerCase())) {
                         subject.getCourse().setProfessor(null);
+                        readerWriter.writeToAudit("Remove Professor from Course of Subject");
                     } else if (subject.getSeminar().isValid() && "seminar".contains(choice.toLowerCase())) {
                         subject.getSeminar().setProfessor(null);
+                        readerWriter.writeToAudit("Remove Professor from Seminar of Subject");
                     } else if (subject.getLaboratory().isValid() && "laboratory".contains(choice.toLowerCase())) {
                         subject.getLaboratory().setProfessor(null);
+                        readerWriter.writeToAudit("Remove Professor from Laboratory of Subject");
                     } else {
                         System.out.println("Invalid input!!!");
                     }
@@ -389,6 +409,7 @@ public class Menu {
                     Student student = chooseStudent(group);
                     if(student != null) {
                         group.removeStudent(student);
+                        readerWriter.writeToAudit("Remove Student from Group");
                     }
                 }
             } else if (option == 4) { // Remove a group from a series
@@ -397,6 +418,7 @@ public class Menu {
                     Group group = chooseGroup(series);
                     if(group != null) {
                         series.removeGroup(group);
+                        readerWriter.writeToAudit("Remove Group from Series");
                     }
                 }
             } else if (option == 5) { // Remove a subject from a curriculum
@@ -405,6 +427,7 @@ public class Menu {
                     Subject subject = chooseSubject(curriculum);
                     if(subject != null) {
                         curriculum.removeObligatory(subject);
+                        readerWriter.writeToAudit("Remove Subject from Curriculum");
                     }
                 }
             } else if (option == 6) { // Remove an optional subject from a curriculum
@@ -413,6 +436,7 @@ public class Menu {
                     OptionalSubject optionalSubject = chooseOptionalSubject(curriculum);
                     if(optionalSubject != null) {
                         curriculum.removeOptional(optionalSubject);
+                        readerWriter.writeToAudit("Remove OptionalSubject from Curriculum");
                     }
                 }
             } else if (option == 7) { // Remove a curriculum from a student
@@ -422,6 +446,7 @@ public class Menu {
                     Student student = chooseStudent();
                     if(student != null) {
                         curriculum.appendCurriculum(student);
+                        readerWriter.writeToAudit("Remove Curriculum from Student");
                     }
                 }
             }
@@ -429,7 +454,7 @@ public class Menu {
         }
     }
 
-    public void showSpecificInformationMenu(){
+    public void showSpecificInformationMenu() throws IOException {
         while (true) {
             System.out.println(
                     """
@@ -448,28 +473,32 @@ public class Menu {
                 Series series = chooseSeries();
                 if(series != null) {
                     faculty.printGroupsOfSeries(series);
+                    readerWriter.writeToAudit("Print Groups of Series in sorted matter");
                 }
             } else if (option == 2) { // Print all students of a group in a sorted matter
                 Group group = chooseGroup();
                 if(group != null) {
                     faculty.printStudentsOfGroup(group);
+                    readerWriter.writeToAudit("Print Students of Group in sorted matter");
                 }
             } else if (option == 3) { // Print all subjects of a student
                 Student student = chooseStudent();
                 if(student != null) {
                     faculty.printSubjectsOfStudent(student);
+                    readerWriter.writeToAudit("Print Subjects of Student");
                 }
             } else if (option == 4) { // Print all subjects of a curriculum
                 Curriculum curriculum = chooseCurriculum();
                 if(curriculum != null) {
                     faculty.printAllSubjectsOfCurriculum(curriculum);
+                    readerWriter.writeToAudit("Print Subjects and OptionalSubjects of Curriculum");
                 }
             }
             printSpaces(3);
         }
     }
 
-    public void removeElementsMenu(){
+    public void removeElementsMenu() throws IOException {
         while (true) {
             System.out.println(
                     """
@@ -491,43 +520,50 @@ public class Menu {
                 Student student = chooseStudent();
                 if(student != null) {
                     faculty.removeStudent(student);
+                    readerWriter.writeToAudit("Remove Student from list");
                 }
             } else if (option == 2) { // Remove a subject
                 Subject subject = chooseSubject();
                 if(subject != null) {
                     faculty.removeSubject(subject);
+                    readerWriter.writeToAudit("Remove Subject from list");
                 }
             } else if (option == 3) { // Remove an optional subject
                 OptionalSubject optionalSubject = chooseOptionalSubject();
                 if(optionalSubject != null) {
                     faculty.removeOptionalSubject(optionalSubject);
+                    readerWriter.writeToAudit("Remove OptionalSubject from list");
                 }
             } else if (option == 4) { // Remove a professor
                 Professor professor = chooseProfessor();
                 if(professor != null) {
                     faculty.removeProfessor(professor);
+                    readerWriter.writeToAudit("Remove Professor from list");
                 }
             } else if (option == 5) { // Remove a group
                 Group group = chooseGroup();
                 if(group != null) {
                     faculty.removeGroup(group);
+                    readerWriter.writeToAudit("Remove Group from list");
                 }
             } else if (option == 6) { // Remove a series
                 Series series = chooseSeries();
                 if(series != null) {
                     faculty.removeSeries(series);
+                    readerWriter.writeToAudit("Remove Series from list");
                 }
             } else if (option == 7) { // Remove a curriculum
                 Curriculum curriculum = chooseCurriculum();
                 if(curriculum != null) {
                     faculty.removeCurriculum(curriculum);
+                    readerWriter.writeToAudit("Remove Curriculum from list");
                 }
             }
             printSpaces(3);
         }
     }
 
-    public void showElementsMenu(){
+    public void showElementsMenu() throws IOException {
         while (true) {
             System.out.println(
                     """
@@ -547,18 +583,25 @@ public class Menu {
                 break;
             } else if (option == 1) { // Print all students
                 faculty.printStudents();
+                readerWriter.writeToAudit("Print Students from list");
             } else if (option == 2) { // Print all subjects
                 faculty.printSubjects();
+                readerWriter.writeToAudit("Print Subjects from list");
             } else if (option == 3) { // Print all optional subjects
                 faculty.printOptionalSubjects();
+                readerWriter.writeToAudit("Print OptionalSubjects from list");
             } else if (option == 4) { // Print all professors
                 faculty.printProfessors();
+                readerWriter.writeToAudit("Print Professors from list");
             } else if (option == 5) { // Print all groups
                 faculty.printGroups();
+                readerWriter.writeToAudit("Print Groups from list");
             } else if (option == 6) { // Print all series
                 faculty.printSeries();
+                readerWriter.writeToAudit("Print Series from list");
             } else if (option == 7) { // Print all curricula
                 faculty.printCurricula();
+                readerWriter.writeToAudit("Print Curricula from list");
             }
             printSpaces(3);
         }

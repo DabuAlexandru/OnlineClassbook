@@ -16,6 +16,7 @@ public class Series {
 
     public Series(String name) {
         this.name = name;
+        groups = new TreeSet<>();
     }
 
     public void setSeries()
