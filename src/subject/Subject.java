@@ -20,6 +20,12 @@ public class Subject {
             passingGrade = -1;
         }
 
+        public StudyClass(Professor professor, float weight, float passingGrade) {
+            this.professor = professor;
+            this.weight = weight;
+            this.passingGrade = passingGrade;
+        }
+
         public StudyClass(Professor professor, float weight, float grade, float passingGrade) {
             this.professor = professor;
             this.weight = weight;
@@ -114,6 +120,8 @@ public class Subject {
         }
     }
 
+    static int counter = 0;
+    int subjectID;
     String name;
 
     StudyClass course;
@@ -127,6 +135,8 @@ public class Subject {
     protected int currentWeight = 0;
 
     public Subject() {
+        counter += 1;
+        subjectID = counter;
         this.name = "";
         this.course = new StudyClass();
         this.seminar = new StudyClass();
@@ -137,6 +147,8 @@ public class Subject {
     }
 
     public Subject(String name, StudyClass course, StudyClass seminar, StudyClass laboratory, int grade, float passingGrade, int credits) {
+        counter += 1;
+        subjectID = counter;
         this.name = name;
         this.course = course;
         this.seminar = seminar;
@@ -147,6 +159,18 @@ public class Subject {
     }
 
     public Subject(String name, float passingGrade, int credits) {
+        this.name = name;
+        this.course = new StudyClass();
+        this.seminar = new StudyClass();
+        this.laboratory = new StudyClass();
+        this.grade = 1;
+        this.passingGrade = passingGrade;
+        this.credits = credits;
+    }
+
+    public Subject(int subjectID, String name, float passingGrade, int credits) {
+        counter = max(subjectID, counter);
+        this.subjectID = subjectID;
         this.name = name;
         this.course = new StudyClass();
         this.seminar = new StudyClass();

@@ -12,11 +12,19 @@ public class Professor extends Person{
     int salary;
 
     public Professor() {
+        super();
     }
 
     public Professor(String first_name, String last_name, String sex, String birth_date, String phone_number,
                      String email, String join_date, String rank, int salary) {
         super(first_name, last_name, sex, birth_date, phone_number, email, join_date);
+        setRank(rank);
+        this.salary = salary;
+    }
+
+    public Professor(int personID, String first_name, String last_name, String sex, String birth_date, String phone_number,
+                     String email, String join_date, String rank, int salary) {
+        super(personID, first_name, last_name, sex, birth_date, phone_number, email, join_date);
         setRank(rank);
         this.salary = salary;
     }

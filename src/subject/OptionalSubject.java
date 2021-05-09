@@ -12,6 +12,7 @@ public class OptionalSubject extends Subject { // this class should be the repre
     int slots_available; // maximum number of slots
 
     public OptionalSubject() {
+        super();
         this.graded = false;
         this.slots_available = 10;
     }

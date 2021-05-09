@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
+import static java.lang.Math.max;
+
 public abstract class Person implements Comparable<Person>{
     String firstName;
     String lastName;
@@ -16,10 +18,29 @@ public abstract class Person implements Comparable<Person>{
     String email;
     String joinDate;
 
+    static int counter = 0;
+    int personID;
+
     public Person() {
+        counter += 1;
+        this.personID = counter;
     }
 
     public Person(String firstName, String lastName, String sex, String birthDate, String phoneNumber, String email, String joinDate) {
+        counter += 1;
+        this.personID = counter;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.sex = sex;
+        this.birthDate = birthDate;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.joinDate = joinDate;
+    }
+
+    public Person(int personID, String firstName, String lastName, String sex, String birthDate, String phoneNumber, String email, String joinDate) {
+        counter = max(personID, counter);
+        this.personID = personID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.sex = sex;

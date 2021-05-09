@@ -6,31 +6,53 @@ import subject.Subject;
 
 import java.util.*;
 
+import static java.lang.Math.max;
+
 public class Curriculum {
+    static int counter = 0;
+    int curriculumID;
     String major;
     int year;
     int semester;
-	int req_credit;
+	int reqCredit;
 
     Set<Subject> obligatory;
     Set<OptionalSubject> optional;
 
     public Curriculum() {
+        counter += 1;
+        this.curriculumID = counter;
         this.major = "";
         this.year = 1;
         this.semester = 1;
-        this.req_credit = 0;
+        this.reqCredit = 0;
         this.obligatory = new HashSet<>();
         this.optional = new HashSet<>();
     }
 
-    public Curriculum(String major, int year, int semester, int req_credit) {
+    public Curriculum(String major, int year, int semester, int reqCredit) {
+        counter += 1;
+        this.curriculumID = counter;
         this.major = major;
         this.year = year;
         this.semester = semester;
-        this.req_credit = req_credit;
+        this.reqCredit = reqCredit;
         this.obligatory = new HashSet<>();
         this.optional = new HashSet<>();
+    }
+
+    public Curriculum(int curriculumID, String major, int year, int semester, int reqCredit,
+                      Set<Subject> obligatory, Set<OptionalSubject> optional) {
+        counter = max(curriculumID, counter);
+        this.curriculumID = curriculumID;
+        this.major = major;
+        this.year = year;
+        this.semester = semester;
+        this.reqCredit = reqCredit;
+        this.obligatory = new HashSet<>();
+        this.optional = new HashSet<>();
+        this.obligatory = obligatory;
+        this.optional = optional;
     }
 
     public void setCurriculum(){
@@ -43,7 +65,7 @@ public class Curriculum {
         System.out.print("semester = ");
         this.semester = myInput.nextInt();
         System.out.print("required credits = ");
-        this.req_credit = myInput.nextInt();
+        this.reqCredit = myInput.nextInt();
         System.out.println();
     }
 
@@ -71,12 +93,12 @@ public class Curriculum {
         this.semester = semester;
     }
 
-    public int getReq_credit() {
-        return req_credit;
+    public int getReqCredit() {
+        return reqCredit;
     }
 
-    public void setReq_credit(int req_credit) {
-        this.req_credit = req_credit;
+    public void setReqCredit(int reqCredit) {
+        this.reqCredit = reqCredit;
     }
 
     public Set<Subject> getObligatory(){
@@ -130,7 +152,7 @@ public class Curriculum {
                 "major = " + major +
                 "\nyear = " + year +
                 ", semester = " + semester +
-                ", req_credit=" + req_credit;
+                ", reqCredit=" + reqCredit;
     }
 
     @Override
@@ -138,11 +160,11 @@ public class Curriculum {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Curriculum that = (Curriculum) o;
-        return year == that.year && semester == that.semester && req_credit == that.req_credit && major.equals(that.major);
+        return year == that.year && semester == that.semester && reqCredit == that.reqCredit && major.equals(that.major);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(major, year, semester, req_credit);
+        return Objects.hash(major, year, semester, reqCredit);
     }
 }

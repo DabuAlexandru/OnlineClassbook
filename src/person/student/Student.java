@@ -15,6 +15,7 @@ public class Student extends Person {
     Set<Subject> subjects;
 
     public Student() {
+        super();
         year = 0;
         semester = 0;
         group = new Group();
@@ -28,6 +29,15 @@ public class Student extends Person {
         this.semester = semester;
         this.group = new Group();
         this.subjects = new HashSet<Subject>();
+    }
+
+    public Student(int personID, String first_name, String last_name, String sex, String birth_date, String phone_number,
+                   String email, String join_date, int year, int semester, Set<Subject> subjects) {
+        super(personID, first_name, last_name, sex, birth_date, phone_number, email, join_date);
+        this.year = year;
+        this.semester = semester;
+        this.group = new Group();
+        this.subjects = subjects;
     }
 
     public void setStudent() {

@@ -5,18 +5,40 @@ import person.student.Student;
 
 import java.util.*;
 
+import static java.lang.Math.max;
+
 public class Series {
+    static int counter = 0;
+    int seriesID;
     String name;
     TreeSet<Group> groups;
 
     public Series() {
+        counter += 1;
+        seriesID = counter;
         name = "";
         groups = new TreeSet<>();
     }
 
     public Series(String name) {
+        counter += 1;
+        this.seriesID = counter;
         this.name = name;
         groups = new TreeSet<>();
+    }
+
+    public Series(int seriesID, String name) {
+        counter = max(counter, seriesID);
+        this.seriesID = seriesID;
+        this.name = name;
+        groups = new TreeSet<>();
+    }
+
+    public Series(int seriesID, String name, TreeSet<Group> groups) {
+        counter = max(counter, seriesID);
+        this.seriesID = seriesID;
+        this.name = name;
+        this.groups = groups;
     }
 
     public void setSeries()

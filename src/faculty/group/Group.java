@@ -6,22 +6,51 @@ import person.student.Student;
 
 import java.util.*;
 
+import static java.lang.Math.max;
+
 public class Group implements Comparable<Group>{
+    static int counter = 0;
+    int groupID;
     String name;
     Series series;
     TreeSet<Student> students;
 
+    public static void SetGlobalId(int newID) {
+        counter = newID;
+    }
+
+    public static int getGlobalID() {
+        return counter;
+    }
+
+    public int getID() {
+        return groupID;
+    }
+
     public Group() {
+        counter += 1;
+        groupID = counter;
         this.name = "";
         this.students = new TreeSet<>();
     }
 
     public Group(String name) {
+        counter += 1;
+        groupID = counter;
         this.name = name;
         this.students = new TreeSet<>();
     }
 
-    public Group(String name, TreeSet<Student> students) {
+    public Group(int groupID, String name) {
+        counter = max(counter, groupID);
+        this.groupID = groupID;
+        this.name = name;
+        this.students = new TreeSet<>();
+    }
+
+    public Group(int groupID, String name, TreeSet<Student> students) {
+        counter = max(counter, groupID);
+        this.groupID = groupID;
         this.name = name;
         this.students = students;
     }

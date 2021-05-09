@@ -168,7 +168,7 @@ public class ReaderWriter { // singleton
             info.add(((Curriculum) obj).getMajor());
             info.add(String.valueOf(((Curriculum) obj).getYear()));
             info.add(String.valueOf(((Curriculum) obj).getSemester()));
-            info.add(String.valueOf(((Curriculum) obj).getReq_credit()));
+            info.add(String.valueOf(((Curriculum) obj).getReqCredit()));
         } else {
             return;
         }
