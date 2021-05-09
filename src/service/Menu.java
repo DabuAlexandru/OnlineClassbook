@@ -25,13 +25,13 @@ public class Menu {
         faculty.addSpecialization("Mathematics", 100, 50, 1000);
         faculty.addSpecialization("Informatics", 200, 50, 1500);
         myInput = new Scanner(System.in);
-        faculty.setStudents(readerWriter.readFromCSV("student", "src/database/Student.CSV"));
-        faculty.setProfessors(readerWriter.readFromCSV("professor", "src/database/Professor.CSV"));
-        faculty.setSubjects(readerWriter.readFromCSV("subject", "src/database/Subject.CSV"));
-        faculty.setOptionalSubjects(readerWriter.readFromCSV("optional subject", "src/database/OptionalSubject.CSV"));
-        faculty.setGroups(readerWriter.readFromCSV("group", "src/database/Group.CSV"));
-        faculty.setSeries(readerWriter.readFromCSV("series", "src/database/Series.CSV"));
-        faculty.setCurricula(readerWriter.readFromCSV("curriculum", "src/database/Curriculum.CSV"));
+        faculty.setStudents(readerWriter.readFromCSV("Student", "src/database/Student.CSV"));
+        faculty.setProfessors(readerWriter.readFromCSV("Professor", "src/database/Professor.CSV"));
+        faculty.setSubjects(readerWriter.readFromCSV("Subject", "src/database/Subject.CSV"));
+        faculty.setOptionalSubjects(readerWriter.readFromCSV("OptionalSubject", "src/database/OptionalSubject.CSV"));
+        faculty.setGroups(readerWriter.readFromCSV("Group", "src/database/Group.CSV"));
+        faculty.setSeries(readerWriter.readFromCSV("Series", "src/database/Series.CSV"));
+        faculty.setCurricula(readerWriter.readFromCSV("Curriculum", "src/database/Curriculum.CSV"));
         option = 0;
     }
 
@@ -231,31 +231,31 @@ public class Menu {
             } else if (option == 1) { // Add a new student
                 Student student = faculty.addStudent();
                 readerWriter.writeToAudit("Add Student to list");
-                readerWriter.writeToCSV(student, "src/database/Student.CSV", false);
+                readerWriter.writeToCSV(student, "src/database/Student.CSV");
             } else if (option == 2) { // Add a new subject
                 Subject subject = faculty.addSubject();
                 readerWriter.writeToAudit("Add Subject to list");
-                readerWriter.writeToCSV(subject, "src/database/Subject.CSV", false);
+                readerWriter.writeToCSV(subject, "src/database/Subject.CSV");
             } else if (option == 3) { // Add a new optional subject
                 OptionalSubject optionalSubject = faculty.addOptionalSubject();
                 readerWriter.writeToAudit("Add OptionalSubject to list");
-                readerWriter.writeToCSV(optionalSubject, "src/database/OptionalSubject.CSV", false);
+                readerWriter.writeToCSV(optionalSubject, "src/database/OptionalSubject.CSV");
             } else if (option == 4) { // Add a new professor
                 Professor professor = faculty.addProfessor();
                 readerWriter.writeToAudit("Add Professor to list");
-                readerWriter.writeToCSV(professor, "src/database/Professor.CSV", false);
+                readerWriter.writeToCSV(professor, "src/database/Professor.CSV");
             } else if (option == 5) { // Add a new group
                 Group group = faculty.addGroup();
                 readerWriter.writeToAudit("Add Group to list");
-                readerWriter.writeToCSV(group, "src/database/Group.CSV", false);
+                readerWriter.writeToCSV(group, "src/database/Group.CSV");
             } else if (option == 6) { // Add a new series
                 Series series = faculty.addSeries();
                 readerWriter.writeToAudit("Add Series to list");
-                readerWriter.writeToCSV(series, "src/database/Series.CSV", false);
+                readerWriter.writeToCSV(series, "src/database/Series.CSV");
             } else if (option == 7) { // Add a new curriculum
                 Curriculum curriculum = faculty.addCurriculum();
                 readerWriter.writeToAudit("Add Curriculum to list");
-                readerWriter.writeToCSV(curriculum, "src/database/Curriculum.CSV", false);
+                readerWriter.writeToCSV(curriculum, "src/database/Curriculum.CSV");
             }
             printSpaces(3);
         }
