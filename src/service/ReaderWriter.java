@@ -32,56 +32,61 @@ public class ReaderWriter { // singleton
 
     private Person parsePerson(String line, String option) {
         String [] args = line.split(",");
-        String first_name   = args[0];
-        String last_name    = args[1];
-        String sex          = args[2];
-        String birth_date   = args[3];
-        String phone_number = args[4];
-        String email        = args[5];
-        String join_date    = args[6];
+        int personID        = Integer.parseInt(args[0]);
+        String first_name   = args[1];
+        String last_name    = args[2];
+        String sex          = args[3];
+        String birth_date   = args[4];
+        String phone_number = args[5];
+        String email        = args[6];
+        String join_date    = args[7];
         if(option.equals("Student")) {
-            int year        = Integer.parseInt(args[7]);
-            int semester    = Integer.parseInt(args[8]);
-            return new Student(first_name, last_name, sex, birth_date, phone_number, email, join_date, year, semester);
+            int year        = Integer.parseInt(args[8]);
+            int semester    = Integer.parseInt(args[9]);
+            return new Student(personID, first_name, last_name, sex, birth_date, phone_number, email, join_date, year, semester);
         } else {
-            String rank     = args[7];
-            int salary      = Integer.parseInt(args[8]);
-            return new Professor(first_name, last_name, sex, birth_date, phone_number, email, join_date, rank, salary);
+            String rank     = args[8];
+            int salary      = Integer.parseInt(args[9]);
+            return new Professor(personID, first_name, last_name, sex, birth_date, phone_number, email, join_date, rank, salary);
         }
     }
 
     private Subject parseSubject(String line, String option) {
         String [] args = line.split(",");
-        String name             = args[0];
-        float passingGrade      = Float.parseFloat(args[1]);
-        int credits             = Integer.parseInt(args[2]);
+        int subjectID           = Integer.parseInt(args[0]);
+        String name             = args[1];
+        float passingGrade      = Float.parseFloat(args[2]);
+        int credits             = Integer.parseInt(args[3]);
         if(option.equals("OptionalSubject")) {
-            boolean graded      = Boolean.parseBoolean(args[3]);
-            int slots_available = Integer.parseInt(args[4]);
-            return new OptionalSubject(name, passingGrade, credits, graded, slots_available);
+            boolean graded      = Boolean.parseBoolean(args[4]);
+            int slots_available = Integer.parseInt(args[5]);
+            return new OptionalSubject(subjectID, name, passingGrade, credits, graded, slots_available);
         }
-        return new Subject(name, passingGrade, credits);
+        return new Subject(subjectID, name, passingGrade, credits);
     }
 
     private Group parseGroup(String line) {
         String [] args = line.split(",");
-        String name = args[0];
-        return new Group(name);
+        int groupID = Integer.parseInt(args[0]);
+        String name = args[1];
+        return new Group(groupID, name);
     }
 
     private Series parseSeries(String line) {
         String [] args = line.split(",");
-        String name = args[0];
-        return new Series(name);
+        int seriesID    = Integer.parseInt(args[0]);
+        String name     = args[1];
+        return new Series(seriesID, name);
     }
 
     private Curriculum parseCurriculum(String line) {
         String [] args = line.split(",");
-        String major = args[0];
-        int year = Integer.parseInt(args[1]);
-        int semester = Integer.parseInt(args[2]);
-        int req_credits = Integer.parseInt(args[3]);
-        return new Curriculum(major, year, semester, req_credits);
+        int curriculumID    = Integer.parseInt(args[0]);
+        String major        = args[1];
+        int year            = Integer.parseInt(args[2]);
+        int semester        = Integer.parseInt(args[3]);
+        int req_credits     = Integer.parseInt(args[4]);
+        return new Curriculum(curriculumID, major, year, semester, req_credits);
     }
 
     public <T> List<T> readFromCSV(String option, String path) throws IOException {
@@ -112,7 +117,7 @@ public class ReaderWriter { // singleton
                 }
                 objects.add(newObject);
             }
-            if(objects.size() > 0) { writeToAudit("Read from \"" + option + "\" CSV"); }
+            if(objects.size() > 0) { writeToAudit("Read from " + option + " CSV"); }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -121,6 +126,7 @@ public class ReaderWriter { // singleton
 
     public List<String> personToListCSV(String option, Person person) {
         List<String> info = new ArrayList<>();
+        info.add(String.valueOf(person.getPersonID()));
         info.add(person.getFirstName());
         info.add(person.getLastName());
         info.add(person.getSex());
@@ -140,6 +146,7 @@ public class ReaderWriter { // singleton
 
     public List<String> subjectToListCSV(String option, Subject subject) {
         List<String> info = new ArrayList<>();
+        info.add(String.valueOf(subject.getSubjectID()));
         info.add(subject.getName());
         info.add(String.valueOf(subject.getPassingGrade()));
         info.add(String.valueOf(subject.getCredits()));
@@ -152,18 +159,21 @@ public class ReaderWriter { // singleton
 
     public List<String> groupToListCSV(String option, Group group) {
         List<String> info = new ArrayList<>();
+        info.add(String.valueOf(group.getGroupID()));
         info.add(group.getName());
         return info;
     }
 
     public List<String> seriesToListCSV(String option, Series series) {
         List<String> info = new ArrayList<>();
+        info.add(String.valueOf(series.getSeriesID()));
         info.add(series.getName());
         return info;
     }
 
     public List<String> curriculumToListCSV(String option, Curriculum curriculum) {
         List<String> info = new ArrayList<>();
+        info.add(String.valueOf(curriculum.getCurriculumID()));
         info.add(curriculum.getMajor());
         info.add(String.valueOf(curriculum.getYear()));
         info.add(String.valueOf(curriculum.getSemester()));
@@ -172,19 +182,20 @@ public class ReaderWriter { // singleton
     }
 
     public void initializeCSV(String option, BufferedWriter bw) throws IOException {
-        if(option.equals("Student") || option.equals("Professor")) {
-            bw.write("FirstName, LastName, Sex, BirthDate, PhoneNumber, Email, JoinDate");
-            if (option.equals("Student")) {
-                bw.write(", Year, Semester");
-            } else {
-                bw.write(", Rank, Salary");
+        switch (option) {
+            case "Student", "Professor" -> {
+                bw.write("PersonID, FirstName, LastName, Sex, BirthDate, PhoneNumber, Email, JoinDate");
+                if (option.equals("Student")) {
+                    bw.write(", Year, Semester");
+                } else {
+                    bw.write(", Rank, Salary");
+                }
             }
-        } else if (option.equals("Curriculum")) {
-            bw.write("Major, Year, Semester, RequiredCredits");
-        } else {
-            bw.write("Name");
-            if (option.equals("Subject") || option.equals("OptionalSubject")) {
-                bw.write(", PassingGrade, Credits");
+            case "Curriculum" -> bw.write("CurriculumID, Major, Year, Semester, RequiredCredits");
+            case "Group" -> bw.write("GroupID, Name");
+            case "Series" -> bw.write("SeriesID, Name");
+            case "Subject", "OptionalSubject" -> {
+                bw.write("SubjectID, Name, PassingGrade, Credits");
                 if (option.equals("OptionalSubject")) {
                     bw.write(", Graded, SlotsAvailable");
                 }
@@ -228,7 +239,16 @@ public class ReaderWriter { // singleton
         bw.write(result);
         bw.newLine();
         bw.close();
-        writeToAudit("Read from \"" + option + "\" CSV");
+        writeToAudit("Write to " + option + " CSV");
+    }
+
+    public <T> void writeToCSV(List<T> objects, String path) throws IOException {
+        File file = new File(path);
+        BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+        bw.close();
+        for(T obj : objects) {
+            writeToCSV(obj, path);
+        }
     }
 
     public void writeToAudit(String action) throws IOException {

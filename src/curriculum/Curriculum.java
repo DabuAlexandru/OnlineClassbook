@@ -41,6 +41,17 @@ public class Curriculum {
         this.optional = new HashSet<>();
     }
 
+    public Curriculum(int curriculumID, String major, int year, int semester, int reqCredit) {
+        counter = max(curriculumID, counter);
+        this.curriculumID = curriculumID;
+        this.major = major;
+        this.year = year;
+        this.semester = semester;
+        this.reqCredit = reqCredit;
+        this.obligatory = new HashSet<>();
+        this.optional = new HashSet<>();
+    }
+
     public Curriculum(int curriculumID, String major, int year, int semester, int reqCredit,
                       Set<Subject> obligatory, Set<OptionalSubject> optional) {
         counter = max(curriculumID, counter);
@@ -67,6 +78,28 @@ public class Curriculum {
         System.out.print("required credits = ");
         this.reqCredit = myInput.nextInt();
         System.out.println();
+    }
+
+    public int getCurriculumID() {
+        return curriculumID;
+    }
+
+    public Subject getObligatoryByID(int subjectID) {
+        for(Subject subject : obligatory) {
+            if(subject.getSubjectID() == subjectID) {
+                return subject;
+            }
+        }
+        return null;
+    }
+
+    public OptionalSubject getOptionalByID(int subjectID) {
+        for(OptionalSubject optionalSubject : optional) {
+            if(optionalSubject.getSubjectID() == subjectID) {
+                return optionalSubject;
+            }
+        }
+        return null;
     }
 
     public String getMajor() {

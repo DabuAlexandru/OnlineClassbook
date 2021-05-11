@@ -3,6 +3,7 @@ package faculty.group;
 import faculty.series.Series;
 import person.Person;
 import person.student.Student;
+import subject.Subject;
 
 import java.util.*;
 
@@ -75,6 +76,19 @@ public class Group implements Comparable<Group>{
             student.setGroup(null);
             this.students.remove(student);
         }
+    }
+
+    public Student getStudentByID(int personID) {
+        for(Student student : students) {
+            if(student.getPersonID() == personID) {
+                return student;
+            }
+        }
+        return null;
+    }
+
+    public int getGroupID() {
+        return groupID;
     }
 
     public int getNumOfStudents() {

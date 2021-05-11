@@ -1,4 +1,3 @@
-FirstName, LastName, Sex, BirthDate, PhoneNumber, Email, JoinDate, Year, Semester
-11,11,1,1,1,,1,1,1
-1,1,1,1,1,1,1,1,1
-1,1,1,1,1,1,,1,1
+PersonID, FirstName, LastName, Sex, BirthDate, PhoneNumber, Email, JoinDate, Year, Semester
+1,1,1,1,1,1,1,1,1,1
+2,2,2,2,2,2,2,2,2,2

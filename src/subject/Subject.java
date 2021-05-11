@@ -223,6 +223,10 @@ public class Subject {
         normalizeWeight();
     }
 
+    public int getSubjectID() {
+        return subjectID;
+    }
+
     public String getName() {
         return name;
     }

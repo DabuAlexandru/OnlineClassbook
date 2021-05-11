@@ -76,6 +76,10 @@ public abstract class Person implements Comparable<Person>{
         this.joinDate = myInput.nextLine();
     }
 
+    public int getPersonID() {
+        return personID;
+    }
+
     public String getFirstName() {
         return firstName;
     }

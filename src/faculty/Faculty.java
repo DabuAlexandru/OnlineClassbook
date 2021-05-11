@@ -185,7 +185,7 @@ public class Faculty { // singleton
     }
     public void removeStudent(Student student){
         Group group = student.getGroup();
-        group.removeStudent(student);
+        if(group != null) { group.removeStudent(student); }
         students.remove(student);
     }
 
@@ -208,6 +208,9 @@ public class Faculty { // singleton
         removeOptionalSubject(optionalSubject);
     }
     public void removeOptionalSubject(OptionalSubject optionalSubject){
+        for(Student student : this.students) {
+            student.removeSubject(optionalSubject);
+        }
         for(Curriculum curriculum : this.curricula) {
             curriculum.getOptional().remove(optionalSubject);
         }
@@ -243,6 +246,8 @@ public class Faculty { // singleton
             student.setGroup(null);
             group.removeStudent(student);
         }
+        Series series = group.getSeries();
+        if(series != null) { series.removeGroup(group); }
         this.groups.remove(group);
     }
 
@@ -413,31 +418,66 @@ public class Faculty { // singleton
         }
     }
 
+    public void printGroupsOfSeriesByID(Series series){
+        List<Group> groups = new ArrayList<>(series.getGroups());
+        groups.sort(Comparator.comparing(Group::getGroupID));
+        for(Group group : groups){
+            System.out.println(group.getGroupID() + ": " + group);
+        }
+    }
+
+    public void printStudentsOfGroupByID(Group group){
+        List<Student> students = new ArrayList<>(group.getStudents());
+        students.sort(Comparator.comparing(Student::getPersonID));
+        for(Student student : students){
+            System.out.println(student.getPersonID() + ": " + student);
+        }
+    }
+
+    public void printSubjectsOfStudentByID(Student student){
+        List<Subject> subjects = new ArrayList<>(student.getSubjects());
+        subjects.sort(Comparator.comparing(Subject::getSubjectID));
+        for(Subject subject : subjects){
+            System.out.println(subject.getSubjectID() + ": " + subject);
+        }
+    }
+
+    public void printObligatorySubjectsOfCurriculumByID(Curriculum curriculum) {
+        List<Subject> subjects = new ArrayList<>(curriculum.getObligatory());
+        subjects.sort(Comparator.comparing(Subject::getSubjectID));
+        for(Subject subject : subjects){
+            System.out.println(subject.getSubjectID() + ": " + subject);
+        }
+    }
+
+    public void printOptionalSubjectsOfCurriculumByID(Curriculum curriculum) {
+        List<OptionalSubject> optionalSubjects = new ArrayList<>(curriculum.getOptional());
+        optionalSubjects.sort(Comparator.comparing(Subject::getSubjectID));
+        for (OptionalSubject optionalSubject : optionalSubjects) {
+            System.out.println(optionalSubject.getSubjectID() + ": " + optionalSubject);
+        }
+    }
+
     // get specific items
 
-    public Subject getSubjectOfStudent(Student student, int index) {
-        List<Subject> subjects = new ArrayList<>(student.getSubjects());
-        return subjects.get(index);
+    public Subject getSubjectOfStudent(Student student, int subjectID) {
+        return student.getSubjectByID(subjectID);
     }
 
-    public Student getStudentOfGroup(Group group, int index) {
-        List<Student> students = new ArrayList<>(group.getStudents());
-        return students.get(index);
+    public Student getStudentOfGroup(Group group, int personID) {
+        return group.getStudentByID(personID);
     }
 
-    public Group getGroupOfSeries(Series series, int index) {
-        List<Group> groups = new ArrayList<>(series.getGroups());
-        return groups.get(index);
+    public Group getGroupOfSeries(Series series, int groupID) {
+        return series.getGroupByID(groupID);
     }
 
-    public Subject getObligatoryOfCurriculum(Curriculum curriculum, int index) {
-        List<Subject> subjects = new ArrayList<>(curriculum.getObligatory());
-        return subjects.get(index);
+    public Subject getObligatoryOfCurriculum(Curriculum curriculum, int subjectID) {
+        return curriculum.getObligatoryByID(subjectID);
     }
 
-    public OptionalSubject getOptionalOfCurriculum(Curriculum curriculum, int index) {
-        List<OptionalSubject> optionalSubjects = new ArrayList<>(curriculum.getOptional());
-        return optionalSubjects.get(index);
+    public OptionalSubject getOptionalOfCurriculum(Curriculum curriculum, int subjectID) {
+        return curriculum.getOptionalByID(subjectID);
     }
 
     @Override

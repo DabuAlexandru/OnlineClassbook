@@ -18,7 +18,6 @@ public class Student extends Person {
         super();
         year = 0;
         semester = 0;
-        group = new Group();
         subjects = new HashSet<Subject>();
     }
 
@@ -27,7 +26,14 @@ public class Student extends Person {
         super(first_name, last_name, sex, birth_date, phone_number, email, join_date);
         this.year = year;
         this.semester = semester;
-        this.group = new Group();
+        this.subjects = new HashSet<Subject>();
+    }
+
+    public Student(int personID, String first_name, String last_name, String sex, String birth_date, String phone_number,
+                   String email, String join_date, int year, int semester) {
+        super(personID, first_name, last_name, sex, birth_date, phone_number, email, join_date);
+        this.year = year;
+        this.semester = semester;
         this.subjects = new HashSet<Subject>();
     }
 
@@ -36,7 +42,6 @@ public class Student extends Person {
         super(personID, first_name, last_name, sex, birth_date, phone_number, email, join_date);
         this.year = year;
         this.semester = semester;
-        this.group = new Group();
         this.subjects = subjects;
     }
 
@@ -50,6 +55,15 @@ public class Student extends Person {
         System.out.println("Enter semester: ");
         this.semester = myInput.nextInt();
 
+    }
+
+    public Subject getSubjectByID(int subjectID) {
+        for(Subject subject : subjects) {
+            if(subject.getSubjectID() == subjectID) {
+                return subject;
+            }
+        }
+        return null;
     }
 
     public int getNumOfSubjects() { return subjects.size(); }
@@ -98,7 +112,7 @@ public class Student extends Person {
 
     @Override
     public String toString() {
-        if(group == null)
+        if(this.group == null)
         {
             return super.toString() + " : Student" +
                     "\nYear: " + this.year +

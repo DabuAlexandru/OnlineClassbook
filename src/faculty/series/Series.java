@@ -64,6 +64,19 @@ public class Series {
         }
     }
 
+    public Group getGroupByID(int groupID) {
+        for(Group group : groups) {
+            if(group.getGroupID() == groupID) {
+                return group;
+            }
+        }
+        return null;
+    }
+
+    public int getSeriesID() {
+        return seriesID;
+    }
+
     public int getNumOfGroups() {
         return groups.size();
     }

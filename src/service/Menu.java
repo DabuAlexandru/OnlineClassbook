@@ -111,13 +111,11 @@ public class Menu {
     }
 
     private Student chooseStudent(Group group) {
-        int n, index;
         System.out.println("\nChoose a student:");
-        faculty.printStudentsOfGroup(group);
-        n = group.getNumOfStudents();
-        index = getValidIndex(n);
-        if(index == -1) { return null; }
-        return faculty.getStudentOfGroup(group, index);
+        faculty.printStudentsOfGroupByID(group);
+        System.out.print("personID: ");
+        int personID = myInput.nextInt();
+        return faculty.getStudentOfGroup(group, personID);
     }
 
     private Subject chooseSubject(){
@@ -131,23 +129,19 @@ public class Menu {
     }
 
     private Subject chooseSubject(Student student){
-        int n, index;
         System.out.println("Choose a subject:");
-        faculty.printSubjectsOfStudent(student);
-        n = student.getNumOfSubjects();
-        index = getValidIndex(n);
-        if(index == -1) { return null; }
-        return faculty.getSubjectOfStudent(student, index);
+        faculty.printSubjectsOfStudentByID(student);
+        System.out.print("subjectID: ");
+        int subjectID = myInput.nextInt();
+        return faculty.getSubjectOfStudent(student, subjectID);
     }
 
     private Subject chooseSubject(Curriculum curriculum){
-        int n, index;
         System.out.println("Choose a subject:");
-        faculty.printObligatorySubjectsOfCurriculum(curriculum);
-        n = curriculum.getNumOfObligatory();
-        index = getValidIndex(n);
-        if(index == -1) { return null; }
-        return faculty.getObligatoryOfCurriculum(curriculum, index);
+        faculty.printObligatorySubjectsOfCurriculumByID(curriculum);
+        System.out.print("subjectID: ");
+        int subjectID = myInput.nextInt();
+        return faculty.getObligatoryOfCurriculum(curriculum, subjectID);
     }
 
     private OptionalSubject chooseOptionalSubject(){
@@ -161,13 +155,11 @@ public class Menu {
     }
 
     private OptionalSubject chooseOptionalSubject(Curriculum curriculum){
-        int n, index;
         System.out.println("Choose an optional subject:");
-        faculty.printOptionalSubjectsOfCurriculum(curriculum);
-        n = curriculum.getNumOfOptional();
-        index = getValidIndex(n);
-        if(index == -1) { return null; }
-        return faculty.getOptionalOfCurriculum(curriculum, index);
+        faculty.printOptionalSubjectsOfCurriculumByID(curriculum);
+        System.out.print("subjectID: ");
+        int subjectID = myInput.nextInt();
+        return faculty.getOptionalOfCurriculum(curriculum, subjectID);
     }
 
     private Professor chooseProfessor(){
@@ -191,13 +183,11 @@ public class Menu {
     }
 
     private Group chooseGroup(Series series){
-        int n, index;
         System.out.println("Choose a group:");
-        faculty.printGroupsOfSeries(series);
-        n = series.getNumOfGroups();
-        index = getValidIndex(n);
-        if(index == -1) { return null; }
-        return faculty.getGroupOfSeries(series, index);
+        faculty.printGroupsOfSeriesByID(series);
+        System.out.print("groupID: ");
+        int groupID = myInput.nextInt();
+        return faculty.getGroupOfSeries(series, groupID);
     }
 
     private Series chooseSeries(){

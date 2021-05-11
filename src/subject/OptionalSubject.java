@@ -30,6 +30,12 @@ public class OptionalSubject extends Subject { // this class should be the repre
         this.slots_available = slots_available;
     }
 
+    public OptionalSubject(int subjectID, String name, float passing_grade, int credits, boolean graded, int slots_available) {
+        super(subjectID, name, passing_grade, credits);
+        this.graded = graded;
+        this.slots_available = slots_available;
+    }
+
     public void setOptionalSubject() {
         Scanner myInput = new Scanner(System.in);
         super.setSubject();
