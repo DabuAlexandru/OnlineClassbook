@@ -252,7 +252,7 @@ public class ReaderWriter { // singleton
     }
 
     public void writeToAudit(String action) throws IOException {
-        writeToAudit(action, "src/database/Audit.CSV");
+        writeToAudit(action, "src/database/Audit.csv");
     }
 
     public void writeToAudit(String action, String path) throws IOException {
