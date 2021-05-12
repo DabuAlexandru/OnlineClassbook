@@ -1,0 +1,6 @@
+PersonID, FirstName, LastName, Sex, BirthDate, PhoneNumber, Email, JoinDate, Rank, Salary
+1,Eliot,Darian,M,07.02.1971,202-555-0104,Eliot.Darian@uni.com,17.12.1997,Professor,8500
+2,Narelle,Gwenda,F,07.11.1973,202-555-0196,Gwenda.Narelle@uni.com,28.11.2003,Reader,7500
+3,Ezekiel,Woody,M,10.09.1974,202-555-0156,Ezekiel.Woody@uni.com,22.10.1999,Reader,5000
+4,Imogene,Kelsey,F,17.12.1978,202-555-0160,Imogene.Kelsey@uni.com,12.05.2005,Lecturer,3750
+5,Sonya,Woody,F,05.05.1990,202-555-0181,Sonya.Woody@uni.com,22.09.2007,Assistant,2000

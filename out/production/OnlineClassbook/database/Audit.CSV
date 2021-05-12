@@ -1,84 +1,49 @@
 Action, Timestamp
-Add Group to list, 2021.05.10 11:04:30
-Read from Group CSV, 2021.05.10 11:04:30
-Add Group to list, 2021.05.10 11:04:32
-Read from Group CSV, 2021.05.10 11:04:32
-Add Group to list, 2021.05.10 11:04:33
-Read from Group CSV, 2021.05.10 11:04:33
-Add Group to list, 2021.05.10 11:04:35
-Read from Group CSV, 2021.05.10 11:04:35
-Remove Group from list, 2021.05.10 11:04:48
-Remove Group from list, 2021.05.10 11:04:49
-Print Groups from list, 2021.05.10 11:04:54
-Read from Group CSV, 2021.05.10 11:05:37
-Remove Group from list, 2021.05.10 11:05:57
-Remove Group from list, 2021.05.10 11:05:59
-Print Groups from list, 2021.05.10 11:06:22
-Read from Group CSV, 2021.05.10 14:54:41
-Add Series to list, 2021.05.10 14:55:03
-Write to Series CSV, 2021.05.10 14:55:03
-Add Student to list, 2021.05.10 14:55:12
-Write to Student CSV, 2021.05.10 14:55:12
-Print Series from list, 2021.05.10 14:55:18
-Print Students from list, 2021.05.10 14:55:20
-Print Groups from list, 2021.05.10 14:56:27
-Add Group to list, 2021.05.10 14:56:32
-Write to Group CSV, 2021.05.10 14:56:32
-Read from Student CSV, 2021.05.10 15:16:28
-Read from Group CSV, 2021.05.10 15:16:28
-Read from Series CSV, 2021.05.10 15:16:28
-Remove Group from list, 2021.05.10 15:16:34
-Remove Group from list, 2021.05.10 15:16:37
-Read from Student CSV, 2021.05.10 15:17:03
-Read from Group CSV, 2021.05.10 15:17:03
-Read from Series CSV, 2021.05.10 15:17:03
-Add Group to list, 2021.05.10 15:17:08
-Write to Group CSV, 2021.05.10 15:17:08
-Add Student to list, 2021.05.10 15:17:12
-Write to Student CSV, 2021.05.10 15:17:12
-Remove Group from list, 2021.05.10 15:17:20
-Read from Student CSV, 2021.05.10 15:17:55
-Read from Group CSV, 2021.05.10 15:17:55
-Read from Series CSV, 2021.05.10 15:17:55
-Remove Group from list, 2021.05.10 15:18:04
-Read from Student CSV, 2021.05.10 16:10:28
-Read from Group CSV, 2021.05.10 16:10:28
-Read from Series CSV, 2021.05.10 16:10:28
-Remove Student from list, 2021.05.10 16:10:45
-Remove Group from list, 2021.05.10 16:10:49
-Remove Series from list, 2021.05.10 16:10:59
-Print Series from list, 2021.05.10 16:11:05
-Print Groups from list, 2021.05.10 16:11:11
-Print Students from list, 2021.05.10 16:11:14
-Read from Student CSV, 2021.05.11 14:23:36
-Read from Group CSV, 2021.05.11 14:23:37
-Read from Series CSV, 2021.05.11 14:23:37
-Read from Student CSV, 2021.05.11 14:39:09
-Read from Group CSV, 2021.05.11 14:39:09
-Read from Series CSV, 2021.05.11 14:39:09
-Add Group to list, 2021.05.11 14:39:17
-Write to Group CSV, 2021.05.11 14:39:17
-Add Group to list, 2021.05.11 14:39:18
-Write to Group CSV, 2021.05.11 14:39:18
-Add Group to list, 2021.05.11 14:39:21
-Write to Group CSV, 2021.05.11 14:39:21
-Add Series to list, 2021.05.11 14:39:28
-Write to Series CSV, 2021.05.11 14:39:28
-Set Series to a Group, 2021.05.11 14:39:40
-Set Series to a Group, 2021.05.11 14:39:46
-Set Series to a Group, 2021.05.11 14:39:50
-Print Groups of Series in sorted matter, 2021.05.11 14:39:58
-Print Students of Group in sorted matter, 2021.05.11 14:40:41
-Remove Group from Series, 2021.05.11 14:41:17
-Remove Group from Series, 2021.05.11 14:41:47
-Read from Student CSV, 2021.05.11 14:45:46
-Read from Group CSV, 2021.05.11 14:45:46
-Read from Series CSV, 2021.05.11 14:45:46
-Print Groups from list, 2021.05.11 14:45:53
-Add Student to Group, 2021.05.11 14:46:17
-Set Series to a Group, 2021.05.11 14:46:22
-Set Series to a Group, 2021.05.11 14:46:23
-Set Series to a Group, 2021.05.11 14:46:28
-Set Series to a Group, 2021.05.11 14:46:33
-Set Series to a Group, 2021.05.11 14:46:36
-Print Groups of Series in sorted matter, 2021.05.11 14:46:45
+Read from Student CSV, 2021.05.12 16:52:32
+Read from Professor CSV, 2021.05.12 16:52:32
+Read from Subject CSV, 2021.05.12 16:52:32
+Read from OptionalSubject CSV, 2021.05.12 16:52:32
+Read from Group CSV, 2021.05.12 16:52:32
+Read from Series CSV, 2021.05.12 16:52:32
+Read from Curriculum CSV, 2021.05.12 16:52:32
+Add Group to list, 2021.05.12 16:52:43
+Write to Group CSV, 2021.05.12 16:52:43
+Add Group to list, 2021.05.12 16:52:44
+Write to Group CSV, 2021.05.12 16:52:44
+Add Group to list, 2021.05.12 16:52:46
+Write to Group CSV, 2021.05.12 16:52:46
+Add Group to list, 2021.05.12 16:52:47
+Write to Group CSV, 2021.05.12 16:52:47
+Print Groups from list, 2021.05.12 16:52:53
+Read from Student CSV, 2021.05.12 16:53:01
+Read from Professor CSV, 2021.05.12 16:53:01
+Read from Subject CSV, 2021.05.12 16:53:01
+Read from OptionalSubject CSV, 2021.05.12 16:53:01
+Read from Group CSV, 2021.05.12 16:53:01
+Read from Series CSV, 2021.05.12 16:53:01
+Read from Curriculum CSV, 2021.05.12 16:53:01
+Print Groups from list, 2021.05.12 16:53:06
+Read from Student CSV, 2021.05.12 16:54:03
+Read from Professor CSV, 2021.05.12 16:54:03
+Read from Subject CSV, 2021.05.12 16:54:03
+Read from OptionalSubject CSV, 2021.05.12 16:54:03
+Read from Group CSV, 2021.05.12 16:54:03
+Read from Series CSV, 2021.05.12 16:54:03
+Read from Curriculum CSV, 2021.05.12 16:54:03
+Add Group to list, 2021.05.12 16:54:09
+Write to Group CSV, 2021.05.12 16:54:09
+Add Group to list, 2021.05.12 16:54:10
+Write to Group CSV, 2021.05.12 16:54:10
+Add Group to list, 2021.05.12 16:54:11
+Write to Group CSV, 2021.05.12 16:54:11
+Rollback database to the backup version, 2021.05.12 16:54:15
+Read from Student CSV, 2021.05.12 16:54:15
+Read from Professor CSV, 2021.05.12 16:54:15
+Read from Subject CSV, 2021.05.12 16:54:15
+Read from OptionalSubject CSV, 2021.05.12 16:54:15
+Read from Group CSV, 2021.05.12 16:54:15
+Read from Series CSV, 2021.05.12 16:54:15
+Read from Curriculum CSV, 2021.05.12 16:54:15
+Add Group to list, 2021.05.12 16:54:18
+Write to Group CSV, 2021.05.12 16:54:18
+Print Groups from list, 2021.05.12 16:54:23

@@ -1,3 +1,12 @@
 PersonID, FirstName, LastName, Sex, BirthDate, PhoneNumber, Email, JoinDate, Year, Semester
-1,1,1,1,1,1,1,1,1,1
-2,2,2,2,2,2,2,2,2,2
+6,Carly,Jeane,F,17.08.2002,205-200-7772,Carly.Jeane@uni.com,09.09.2020,1,1
+7,Mary Beth,Otto,F,11.08.2002,205-203-1420,Mary.Otto@uni.com,10.09.2020,1,2
+8,Susanna,Roz,F,03.02.2001,205-207-4008,Susanna.Roz@uni.com,05.09.2019,2,1
+9,Carson,Jojo,M,21.04.2001,205-212-1218,Carson.Jojo@uni.com,10.08.2019,2,1
+10,Gemma,Danica,F,20.03.2000,205-215-7111,Gemma.Danica@uni.com,07.08.2019,2,2
+11,Dre,Roseann,M,14.11.2000,205-217-2198,Dre.Roseann@uni.com,19.09.2020,2,2
+12,Shell,Dudley,M,01.01.2000,205-225-6372,Shell.Dudley@uni.com,23.10.2018,3,1
+13,Hubert,Evander,M,19.09.1999,205-247-5902,Hubert.Evander@uni.com,11.09.2018,3,1
+14,Lex,Weston,M,05.05.1998,205-269-6990,Lex.Weston@uni.com,15.09.2018,3,1
+15,Peace,Blanche,F,06.03.1998,205-274-7239,Peace.Blanche@uni.com,10.10.2018,3,2
+16,Aleta,Jamie,F,10.12.1998,205-277-5409,Aleta.Jamie@uni.com,09.09.2018,3,2

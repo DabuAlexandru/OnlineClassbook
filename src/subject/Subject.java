@@ -200,8 +200,16 @@ public class Subject {
         System.out.print("Enter name: ");
         this.name = myInput.nextLine();
 
+        System.out.print("Enter passing grade: ");
+        this.passingGrade = myInput.nextFloat();
+
+        System.out.print("Enter credits: ");
+        this.credits = myInput.nextInt();
+
         System.out.println("Course: ");
         this.course.setStudyClass();
+
+        myInput.nextLine(); // consume the stream
 
         System.out.print("Does it have a seminar? (Y/N): ");
         String aux;

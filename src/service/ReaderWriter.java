@@ -30,6 +30,16 @@ public class ReaderWriter { // singleton
         return readerWriter;
     }
 
+    private List<Integer> parseIDList(String ids) {
+        ids = ids.substring(1, ids.length() - 1);
+        String[] stringListID = ids.split(";");
+        List<Integer> listID = new ArrayList<>();
+        for(String id : stringListID) {
+            listID.add(Integer.parseInt(id));
+        }
+        return listID;
+    }
+
     private Person parsePerson(String line, String option) {
         String [] args = line.split(",");
         int personID        = Integer.parseInt(args[0]);
@@ -117,6 +127,7 @@ public class ReaderWriter { // singleton
                 }
                 objects.add(newObject);
             }
+            br.close();
             if(objects.size() > 0) { writeToAudit("Read from " + option + " CSV"); }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -265,6 +276,18 @@ public class ReaderWriter { // singleton
         String timeStamp = new java.text.SimpleDateFormat("yyyy.MM.dd HH:mm:ss").format(new java.util.Date());
         bw.write(action + ", " + timeStamp);
         bw.newLine();
+        bw.close();
+    }
+
+    public void transferData(String readFrom, String writeTo) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(readFrom));
+        BufferedWriter bw = new BufferedWriter(new FileWriter(writeTo, false));
+        String line;
+        while ((line = br.readLine()) != null) {
+            bw.write(line);
+            bw.newLine();
+        }
+        br.close();
         bw.close();
     }
 

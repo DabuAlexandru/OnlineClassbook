@@ -25,6 +25,11 @@ public class Menu {
         faculty.addSpecialization("Mathematics", 100, 50, 1000);
         faculty.addSpecialization("Informatics", 200, 50, 1500);
         myInput = new Scanner(System.in);
+        option = 0;
+        readData();
+    }
+
+    public void readData() throws IOException {
         faculty.setStudents(readerWriter.readFromCSV("Student", "src/database/Student.csv"));
         faculty.setProfessors(readerWriter.readFromCSV("Professor", "src/database/Professor.csv"));
         faculty.setSubjects(readerWriter.readFromCSV("Subject", "src/database/Subject.csv"));
@@ -32,7 +37,18 @@ public class Menu {
         faculty.setGroups(readerWriter.readFromCSV("Group", "src/database/Group.csv"));
         faculty.setSeries(readerWriter.readFromCSV("Series", "src/database/Series.csv"));
         faculty.setCurricula(readerWriter.readFromCSV("Curriculum", "src/database/Curriculum.csv"));
-        option = 0;
+    }
+
+    public void rollback() throws IOException {
+        readerWriter.writeToAudit("Rollback database to the backup version");
+        readerWriter.transferData("src/database/backup/Student.csv", "src/database/Student.csv");
+        readerWriter.transferData("src/database/backup/Professor.csv", "src/database/Professor.csv");
+        readerWriter.transferData("src/database/backup/Subject.csv", "src/database/Subject.csv");
+        readerWriter.transferData("src/database/backup/OptionalSubject.csv", "src/database/OptionalSubject.csv");
+        readerWriter.transferData("src/database/backup/Group.csv", "src/database/Group.csv");
+        readerWriter.transferData("src/database/backup/Series.csv", "src/database/Series.csv");
+        readerWriter.transferData("src/database/backup/Curriculum.csv", "src/database/Curriculum.csv");
+        readData();
     }
 
     public static void printSpaces(int n) {
@@ -53,6 +69,7 @@ public class Menu {
                             4. Show specific information of an item
                             5. Remove an item from the database
                             6. Show all elements of a category
+                            9. Rollback to backup database
                             0. Exit
                             """
             );
@@ -72,6 +89,8 @@ public class Menu {
                 removeElementsMenu();
             } else if (option == 6) { // Show all elements of a category
                 showElementsMenu();
+            } else if (option == 9) { // Rollback to backup database
+                rollback();
             }
             printSpaces(8);
         }
