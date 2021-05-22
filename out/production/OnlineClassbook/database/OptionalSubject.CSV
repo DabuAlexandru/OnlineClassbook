@@ -1,6 +1,0 @@
-SubjectID, Name, PassingGrade, Credits, Graded, SlotsAvailable
-10,English,4.0,3,true,100
-11,3D Printing,4.0,5,false,30
-12,The internet of things,5.0,6,true,120
-13,Robotics,4.0,5,false,80
-14,Astronomy,3.0,3,false,100

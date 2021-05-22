@@ -1,0 +1,12 @@
+# Default ignored files
+/shelf/
+/.idea/workspace.xml
+# Datasource local storage ignored files
+/../../../../../../../../:\facultate\facultate - anul 2\semestrul 2\Programare Avansata pe Obiecte\laborator\OnlineClassbook\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Suplementary ignored files
+.idea
+OnlineClassbook.iml
+/out
