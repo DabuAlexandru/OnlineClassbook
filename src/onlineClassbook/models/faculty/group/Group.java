@@ -54,6 +54,13 @@ public class Group implements Comparable<Group>{
         this.students = students;
     }
 
+    public Group(int groupID, String name, Series series) {
+        counter = max(counter, groupID);
+        this.groupID = groupID;
+        this.name = name;
+        this.series = series;
+    }
+
     public void setGroup() {
         Scanner myInput = new Scanner(System.in);
         System.out.println("Group:");
