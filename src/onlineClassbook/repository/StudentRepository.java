@@ -116,11 +116,11 @@ public class StudentRepository {
             if (resultSet.next()) {
                 ResultSet person = personRepository.getPersonById(resultSet.getInt(1));
                 if(person.next()) {
-                    String result = String.valueOf(resultSet.getString("personID")) + ": " +
+                    String result = String.valueOf(resultSet.getInt("personID")) + ": " +
                             person.getString("firstName") + " " +
                             person.getString("lastName") + " year " +
-                            resultSet.getString("year") + " semester " +
-                            resultSet.getString("semester");
+                            String.valueOf(resultSet.getInt("year")) + " semester " +
+                            String.valueOf(resultSet.getInt("semester"));
                     Group group = groupRepository.getGroupById(resultSet.getInt("groupID"));
                     if (group == null) {
                         return result;

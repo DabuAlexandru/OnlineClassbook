@@ -49,7 +49,7 @@ public abstract class Person implements Comparable<Person>{
     public void setPerson(){
         Scanner myInput = new Scanner(System.in);
 
-        System.out.println("\n--- Set onlineClassbook.model.person ---\n");
+        System.out.println("\n--- Set person ---\n");
         System.out.println("Enter first name: ");
         this.firstName = myInput.nextLine();
 

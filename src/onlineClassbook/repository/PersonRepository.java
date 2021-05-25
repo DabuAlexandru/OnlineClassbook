@@ -34,7 +34,7 @@ public class PersonRepository {
             cstmt.setString(6, person.getEmail());
             cstmt.setString(7, person.getJoinDate());
             cstmt.execute();
-            System.out.println("Added person with id: " + person.getPersonID());
+            System.out.println("Added person: ");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -80,9 +80,9 @@ public class PersonRepository {
     public String mapToString(ResultSet resultSet) {
         try {
             if (resultSet.next()) {
-                return String.valueOf(resultSet.getString(1)) + ": " +
-                        resultSet.getString(2) + " " +
-                        resultSet.getString(3);
+                return String.valueOf(resultSet.getInt("personID")) + ": " +
+                        resultSet.getString("firstName") + " " +
+                        resultSet.getString("lastName");
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

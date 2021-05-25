@@ -86,7 +86,7 @@ public class SeriesRepository {
     public String mapToString(ResultSet resultSet) {
         try {
             if (resultSet.next()) {
-                return String.valueOf(resultSet.getString("seriesID")) + ": series " +
+                return String.valueOf(resultSet.getInt("seriesID")) + ": series " +
                         resultSet.getString("name");
             }
         } catch (SQLException e) {
@@ -139,7 +139,8 @@ public class SeriesRepository {
 
     private Series mapToSeries(ResultSet resultSet) throws SQLException {
         if(resultSet.next()) {
-            return new Series(resultSet.getInt(1), resultSet.getString(2));
+            return new Series(resultSet.getInt("seriesID"),
+                    resultSet.getString("name"));
         }
         return null;
     }

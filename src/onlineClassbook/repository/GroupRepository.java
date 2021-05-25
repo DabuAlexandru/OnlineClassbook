@@ -111,7 +111,7 @@ public class GroupRepository {
         try {
             if (resultSet.next()) {
                 Series series = seriesRepository.getSeriesById(resultSet.getInt("seriesID"));
-                String result = String.valueOf(resultSet.getString("groupID")) + ": group " +
+                String result = String.valueOf(resultSet.getInt("groupID")) + ": group " +
                         resultSet.getString("name");
                 if(series == null) {
                     return result;
@@ -174,10 +174,9 @@ public class GroupRepository {
 
     private Group mapToGroup(ResultSet resultSet) throws SQLException {
         if(resultSet.next()) {
-            seriesRepository.getSeriesById(resultSet.getInt(3));
-            return new Group(resultSet.getInt(1),
-                    resultSet.getString(2),
-                    seriesRepository.getSeriesById(resultSet.getInt(3)));
+            return new Group(resultSet.getInt("groupID"),
+                    resultSet.getString("name"),
+                    seriesRepository.getSeriesById(resultSet.getInt("seriesID")));
         }
         return null;
     }
